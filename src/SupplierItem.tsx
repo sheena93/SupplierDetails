@@ -42,7 +42,7 @@ const SupplierItem: React.FC<ClearingStatsProps> = ({
             <TypeLabel>
                 {titleKey}
             </TypeLabel>
-            <TypeCallout data-testid="clearingStatsAmount" customColor={color}>
+            <TypeCallout data-testid="clearingStatsAmount">
                 {`${currency} ${amount}`}
             </TypeCallout>
             <div className={classes.aprContainer}>
