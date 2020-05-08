@@ -1,18 +1,17 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
+import { screen } from '@testing-library/dom'
 import {SupplierAPRSetting} from './SupplierAPRSetting';
-import { render } from '@testing-library/react'
+import { render,fireEvent } from '@testing-library/react'
 
 
-  describe('<SupplierAPRSetting />', () => {
-    const participationSelectorTestId = `[data-testid="participation"]`;
-  
+  describe('<SupplierAPRSetting />', () => { 
     it('Renders MarketActivity with no Suppliers', async () => {
-      const { container,getByText } = render ( <SupplierAPRSetting />,);
-      expect(getByText('Minimum APR you are willing to accept from this supplier')).toBeInTheDocument()
-      expect(container.firstChild).toMatchInlineSnapshot(`
-      <Grid > </Grid>
-    `)
+      render ( <SupplierAPRSetting />,);
+      expect(screen.getByText('Minimum APR you are willing to accept from this supplier')).toBeInTheDocument()
+      expect(screen.getByText('Save')).toBeInTheDocument()
+      expect(screen.getByTestId('minimumaprs')).toBeVisible();
+      expect(screen.getByTestId('saveButton')).toBeVisible();
     });
 });
 

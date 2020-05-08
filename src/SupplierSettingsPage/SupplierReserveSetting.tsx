@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useMemo } from "react";
 import {
   Divider,
   Grid,
@@ -17,6 +17,7 @@ import {
   Checkbox,
 } from "@c2fo/components";
 import { SupplierAPRSettings } from "./Supplier.schema";
+import { usePrevious } from 'react-use';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
@@ -90,7 +91,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-let reserveSettings;
+let reserveSettings : SupplierAPRSettings;
 
 function saveReserveSettings(supplierAPRSettingsObject: SupplierAPRSettings) {
   reserveSettings = Object.assign({}, supplierAPRSettingsObject);
@@ -113,21 +114,16 @@ export const SupplierReserveSetting = () => {
   >(defaultState);
   const percentageSymbol = "%";
 
-  // const prevSettings = usePrevious<SupplierAPRSettings>(supplierAPRSettingsObject);
-  // console.log("prevSettings",prevSettings)
 
-  // const getKeyValue = <U extends keyof T, T extends object>(key: U, obj: T) =>
-  // obj[key];
+  const changeSetting = useMemo(() => {
+    if(!reserveSettings){
+      return true ;
+    }
+    else {
+      return Object.entries(reserveSettings).toString() === Object.entries(supplierAPRSettingsObject).toString();
+    }
+  },[supplierAPRSettingsObject,reserveSettings])
 
-  // const changeSetting = useMemo(() => {
-  //   for (const key in supplierAPRSettingsObject) {
-  //     const element = getKeyValue(key, supplierAPRSettingsObject)
-  //     if(typeof prevSettings === undefined || (prevSettings[key]!= element)) {
-  //       return true;
-  //     }
-  // }
-  // return false;
-  // },[supplierAPRSettingsObject,prevSettings])
 
   const handleChange = useCallback(
     function (fieldName, fieldValue) {
@@ -136,8 +132,11 @@ export const SupplierReserveSetting = () => {
           [fieldName]: fieldValue,
         })
       );
+      if(!reserveSettings){
+        reserveSettings= Object.assign({},defaultState)
+      }
     },
-    [supplierAPRSettingsObject]
+    [supplierAPRSettingsObject,reserveSettings]
   );
 
   const CHARACTER_LIMIT = 150;
@@ -324,6 +323,7 @@ export const SupplierReserveSetting = () => {
         <Button
           variant="contained"
           className={classes.saveButton}
+          disabled={changeSetting}
           disableElevation={true}
           color="inherit"
           onClick={(e) => saveReserveSettings(supplierAPRSettingsObject)}

@@ -104,7 +104,7 @@ function SaveAPR(aprvalue: string) {
           />
         </Grid>
         <Grid item xs={12} sm={6} className={classes.description}>
-          <TypeLabel>
+          <TypeLabel data-testid="minimumaprs">
             {/* todo : i18 translation to be done <T k="maker.supplierMinimumAprHelpText"> Minimum APR you are willing to accept from this supplier </T> */}
             Minimum APR you are willing to accept from this supplier
           </TypeLabel>
@@ -112,6 +112,7 @@ function SaveAPR(aprvalue: string) {
         <Grid item xs={12}>
           <Button
             variant="contained"
+            data-testid="saveButton"
             className={classes.saveButton}
             disabled= {aprvalue === minimumapr}
             color="inherit"
