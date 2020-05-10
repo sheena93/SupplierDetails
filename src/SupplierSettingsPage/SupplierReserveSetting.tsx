@@ -55,6 +55,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
     display: "grid",
   },
   saveButton: {
+    backgroundColor: "#008000",
     padding: theme.spacing(1, 2.5),
     color: "#000000",
     [theme.breakpoints.up("sm")]: {

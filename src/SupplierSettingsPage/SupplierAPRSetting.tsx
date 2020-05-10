@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState,useMemo } from "react";
 import {
   Grid,
   Liquidity,
@@ -45,7 +45,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
     display: "grid",
   },
   saveButton: {
-    backgroundColor: '#008000',
+    backgroundColor: "#008000",
     color: "#FFFFFF",
     padding: theme.spacing(1, 2.5),
     [theme.breakpoints.up("sm")]: {
@@ -71,59 +71,65 @@ const useStyles = makeStyles<Theme>((theme) => ({
     alignItems: "center",
   },
 }));
-let minimumapr:string;
-
+let minimumapr: string;
 
 function SaveAPR(aprvalue: string) {
   minimumapr = aprvalue;
-  console.log("minimumapr", minimumapr);
 }
-  export const SupplierAPRSetting = () => {
-    const classes = useStyles();
-    const [aprvalue, setValue] = useState<string>("");
-    const percentageSymbol = "%";
-    return (
-      <Grid container className={classes.supplierContainer}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            className={classes.textField}
-            variant="outlined"
-            error={false}
-            type="number"
-            name="APR"
-            value={aprvalue}
-            onChange={(e) => setValue(e.target.value)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end" variant="filled">
-                  {" "}
-                  {percentageSymbol}
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} className={classes.description}>
-          <TypeLabel data-testid="minimumaprs">
-            {/* todo : i18 translation to be done <T k="maker.supplierMinimumAprHelpText"> Minimum APR you are willing to accept from this supplier </T> */}
-            Minimum APR you are willing to accept from this supplier
-          </TypeLabel>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            variant="contained"
-            data-testid="saveButton"
-            className={classes.saveButton}
-            disabled= {aprvalue === minimumapr}
-            color="inherit"
-            onClick={(e) => SaveAPR(aprvalue)}
-          >
-            {/* todo : i18 translation to be done <T k="Save"> Save </T> */}
-            Save
-          </Button>
-        </Grid>
-      </Grid>
-    );
-  };
 
- 
+export const SupplierAPRSetting = () => {
+  const classes = useStyles();
+  const [aprvalue, setValue] = useState<string>("");
+  const percentageSymbol = "%";
+
+  const changeAPRSetting = useMemo(() => { 
+    if (!minimumapr) 
+    return false;
+    else {
+      return minimumapr == aprvalue;
+    }
+  },[minimumapr,aprvalue])
+
+  return (
+    <Grid container className={classes.supplierContainer}>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          className={classes.textField}
+          variant="outlined"
+          error={false}
+          type="number"
+          name="APR"
+          value={aprvalue}
+          onChange={(e) => setValue(e.target.value)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" variant="filled">
+                {" "}
+                {percentageSymbol}
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6} className={classes.description}>
+        <TypeLabel data-testid="minimumaprs">
+          {/* todo : i18 translation to be done <T k="maker.supplierMinimumAprHelpText"> Minimum APR you are willing to accept from this supplier </T> */}
+          Minimum APR you are willing to accept from this supplier
+        </TypeLabel>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          data-testid="saveButton"
+          className={classes.saveButton}
+          disabled={changeAPRSetting}
+          color="inherit"
+          onClick={(e) => SaveAPR(aprvalue)}
+        >
+          {/* todo : i18 translation to be done <T k="Save"> Save </T> */}
+          Save
+        </Button>
+      </Grid>
+    </Grid>
+  );
+};
