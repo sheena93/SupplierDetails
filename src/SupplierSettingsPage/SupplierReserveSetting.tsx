@@ -1,4 +1,4 @@
-import React, { useState, useCallback,useMemo } from "react";
+import React, { useState, useCallback,useMemo, useEffect } from "react";
 import {
   Divider,
   Grid,
@@ -15,8 +15,10 @@ import {
   FormControlLabel,
   TypeBase,
   Checkbox,
+  MenuItem
 } from "@c2fo/components";
-import { SupplierAPRSettings } from "./Supplier.schema";
+import { ReserveSettings,INVOICE_PRIORITY,RESERVE_TYPE,PayLoadReserveSetting } from "./Supplier.schema";
+import { supplierInitialMockData } from "./SupplierInitialMockData";
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
@@ -76,50 +78,59 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-let reserveSettings : SupplierAPRSettings;
+let previousSettingsPayload : PayLoadReserveSetting;
+const CHARACTER_LIMIT = 150;
 
-function saveReserveSettings(supplierAPRSettingsObject: SupplierAPRSettings) {
-  reserveSettings = Object.assign({}, supplierAPRSettingsObject);
-  console.log("reserveSettings", reserveSettings);
+
+function saveReserveSettings(supplierReserveSetting: ReserveSettings) {
+  previousSettingsPayload = Object.assign({}, supplierReserveSetting,{
+    reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
+  });
+  // console.log("previousSettingsPayload", previousSettingsPayload);
+  // previousSettingsPayload has the saved value of the reserveform
 }
 
-export const SupplierReserveSetting = () => {
+type ResrverProps = {
+  supplierReserveSetting: ReserveSettings,
+  setSupplierAPRSettings: Function
+}
+
+export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSettings }: ResrverProps) => {
   const classes = useStyles();
-  const defaultState = {
-    reserveType: "Percentage",
-    reservePercentage: 0,
-    reserveReason: "",
-    invoicePriority: 0,
-    runBeforeAdjustment: true,
-    allowOverrides: true,
-  };
-  const [supplierAPRSettingsObject, setSupplierAPRSettings] = useState<SupplierAPRSettings>(defaultState);
   const percentageSymbol = "%";
+  const setSupplierInitialMockData = supplierInitialMockData.reserveSettings;
+
+
+  const reserveType = supplierReserveSetting.reservePercentage ? "reservePercentage" : "reserveAmount"
 
   const changeSetting = useMemo(() => {
-    if(!reserveSettings){
+    if(!previousSettingsPayload){
       return true ;
     }
     else {
-      return Object.entries(reserveSettings).toString() === Object.entries(supplierAPRSettingsObject).toString();
+      const currentSettingsPayload:ReserveSettings = Object.assign({}, supplierReserveSetting,{
+        reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
+      });
+      return Object.entries(previousSettingsPayload).toString() === Object.entries(currentSettingsPayload).toString();
     }
-  },[supplierAPRSettingsObject,reserveSettings])
+  },[supplierReserveSetting,previousSettingsPayload])
 
   const handleChange = useCallback(
     function (fieldName, fieldValue) {
+      if(!previousSettingsPayload){
+        debugger;
+        previousSettingsPayload= Object.assign({},supplierReserveSetting,{
+          reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
+        })
+      }
       setSupplierAPRSettings(
-        Object.assign({}, supplierAPRSettingsObject, {
+        Object.assign({}, supplierReserveSetting, {
           [fieldName]: fieldValue,
         })
       );
-      if(!reserveSettings){
-        reserveSettings= Object.assign({},defaultState)
-      }
     },
-    [supplierAPRSettingsObject,reserveSettings]
+    [supplierReserveSetting,previousSettingsPayload]
   );
-
-  const CHARACTER_LIMIT = 150;
   return (
     <Grid container className={classes.supplierContainer}>
       <Grid item xs={12} sm={5} className={classes.labels}>
@@ -129,14 +140,14 @@ export const SupplierReserveSetting = () => {
         </TypeBase>
         <FormControl className={classes.sections} component="fieldset">
           <RadioGroup
-            value={supplierAPRSettingsObject.reserveType}
+            value={reserveType}
             name="reserveType"
             className={classes.radiodisplay}
-            onChange={(e) => handleChange("reserveType", e.target.value)}
+            onChange={(e) => handleChange(reserveType, e.target.value)}
           >
             <FormControlLabel
               className={classes.radioButton}
-              value="Percentage"
+              value="reservePercentage"
               data-testid="invoice-filters:all-invoices"
               control={<Radio />}
               //todo: label={<T k="maker.percentage">Percentage</T>}
@@ -144,7 +155,7 @@ export const SupplierReserveSetting = () => {
             />
             <FormControlLabel
               className={classes.radioButton}
-              value="Amount"
+              value="reserveAmount"
               data-testid="invoice-filters:invoice-amount"
               control={<Radio />}
               // label={<T k="maker.amount">Amount</T>}
@@ -164,7 +175,7 @@ export const SupplierReserveSetting = () => {
         <TypeBase isEmphasis>
           {/* todo : i18 translation to be done <T k="maker.reservePercentage"> Reserve Percentage </T> */}
           {/* todo : i18 translation to be done <T k="maker.reserveAmount"> Reserve Amount </T> */}
-          {supplierAPRSettingsObject.reserveType === "Percentage"
+          {reserveType === "reservePercentage"
             ? "Reserve Percentage"
             : "Reserve Amount"}
         </TypeBase>
@@ -174,10 +185,10 @@ export const SupplierReserveSetting = () => {
           error={false}
           type="number"
           name="reservePercentage"
-          value={supplierAPRSettingsObject.reservePercentage}
+          value={supplierReserveSetting.reservePercentage}
           onChange={(e) => handleChange("reservePercentage", e.target.value)}
           InputProps={
-            supplierAPRSettingsObject.reserveType === "Percentage"
+            reserveType === "reservePercentage"
               ? {
                   endAdornment: (
                     <InputAdornment position="end" variant="filled">
@@ -199,8 +210,8 @@ export const SupplierReserveSetting = () => {
           name="reserveReason"
           multiline
           rows={3}
-          value={supplierAPRSettingsObject.reserveReason}
-          helperText={`${supplierAPRSettingsObject.reserveReason.length}/${CHARACTER_LIMIT}`}
+          value={supplierReserveSetting.reserveReason}
+          helperText={`${supplierReserveSetting.reserveReason.length}/${CHARACTER_LIMIT}`}
           onChange={(e) => handleChange("reserveReason", e.target.value)}
           inputProps={{
             maxlength: CHARACTER_LIMIT,
@@ -220,11 +231,18 @@ export const SupplierReserveSetting = () => {
           className={classes.textField}
           variant="outlined"
           error={false}
-          type="number"
+          select
           name="invoicePriority"
-          value={supplierAPRSettingsObject.invoicePriority}
+          value={supplierReserveSetting.invoicePriority}
           onChange={(e) => handleChange("invoicePriority", e.target.value)}
-        />
+        >
+          <MenuItem value={INVOICE_PRIORITY.LOW_TO_HIGH}>
+              {INVOICE_PRIORITY.LOW_TO_HIGH}
+            </MenuItem>
+            <MenuItem value={INVOICE_PRIORITY.HIGH_TO_LOW}>
+              {INVOICE_PRIORITY.HIGH_TO_LOW}
+            </MenuItem>
+          </TextField>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.labels}>
         <TypeLabel
@@ -257,10 +275,10 @@ export const SupplierReserveSetting = () => {
       </Grid>
       <Grid item xs={12} sm={5} className={classes.Checkbox}>
         <Checkbox
-          name="runBeforeAdjustment"
-          checked={supplierAPRSettingsObject.runBeforeAdjustment}
+          name="runBeforeAdjustments"
+          checked={supplierReserveSetting.runBeforeAdjustments}
           onChange={(e) =>
-            handleChange("runBeforeAdjustment", e.target.checked)
+            handleChange("runBeforeAdjustments", e.target.checked)
           }
         />
         <TypeLabel>
@@ -280,9 +298,9 @@ export const SupplierReserveSetting = () => {
       </Grid>
       <Grid item xs={12} sm={5} className={classes.Checkbox}>
         <Checkbox
-          name="allowOverrides"
-          checked={supplierAPRSettingsObject.allowOverrides}
-          onChange={(e) => handleChange("allowOverrides", e.target.checked)}
+          name="allowEslapUpdates"
+          checked={supplierReserveSetting.allowEslapUpdates}
+          onChange={(e) => handleChange("allowEslapUpdates", e.target.checked)}
         />
         <TypeLabel>
           {/* todo : i18 translation to be done <T k="maker.allowEslapUpdates"> Allow overrides? </T> */}
@@ -304,7 +322,7 @@ export const SupplierReserveSetting = () => {
           disabled={changeSetting}
           disableElevation={true}
           color="inherit"
-          onClick={(e) => saveReserveSettings(supplierAPRSettingsObject)}
+          onClick={(e) => saveReserveSettings(supplierReserveSetting)}
         >
           {/* todo : i18 translation to be done <T k="maker.save"> Save </T> */}
           Save

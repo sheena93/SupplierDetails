@@ -1,7 +1,6 @@
-import React, { useState,useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Grid,
-  Liquidity,
   makeStyles,
   Theme,
   TextField,
@@ -9,6 +8,7 @@ import {
   TypeLabel,
   Button,
 } from "@c2fo/components";
+import { SupplierSetting, PayLoadAPRSettings } from "./Supplier.schema";
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
@@ -44,24 +44,40 @@ const useStyles = makeStyles<Theme>((theme) => ({
     alignItems: "center",
   },
 }));
-let minimumapr: string;
+let previousMinimumApr: string;
+const percentageSymbol = "%";
 
-function SaveAPR(aprvalue: string) {
-  minimumapr = aprvalue;
+type APRProps = {
+  supplierAPRSetting: SupplierSetting,
 }
-
-export const SupplierAPRSetting = () => {
+export const SupplierAPRSetting = ({ supplierAPRSetting }: APRProps) => {
   const classes = useStyles();
   const [aprvalue, setValue] = useState<string>("");
-  const percentageSymbol = "%";
 
-  const changeAPRSetting = useMemo(() => { 
-    if (!minimumapr) 
-    return false;
-    else {
-      return minimumapr == aprvalue;
+  useEffect( function (){
+    previousMinimumApr =supplierAPRSetting.minReturnAmount.toString()
+    setValue(previousMinimumApr)
+  },[supplierAPRSetting.minReturnAmount])
+
+  function SaveAPR(aprvalue: string) {
+    const aprObject: PayLoadAPRSettings = {
+      // divisionId: supplierAPRSetting.divisionId,
+      marketId: supplierAPRSetting.marketId,
+      takerId: supplierAPRSetting.takerId,
+      // marketTakerConfigurationId: supplierAPRSetting.marketTakerConfigurationId,
+      minReturnAmount: Number(aprvalue) || 0
     }
-  },[minimumapr,aprvalue])
+    previousMinimumApr = aprvalue;
+    console.log("aprObject",aprObject)
+  }
+
+  const changeAPRSetting = useMemo(() => {
+    if (!previousMinimumApr)
+      return false;
+    else {
+      return previousMinimumApr == aprvalue;
+    }
+  }, [previousMinimumApr, aprvalue])
 
   return (
     <Grid container className={classes.supplierContainer}>

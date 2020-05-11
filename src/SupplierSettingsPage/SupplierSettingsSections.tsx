@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useEffect, useState } from "react";
 import {
   Divider,
   Liquidity,
@@ -7,8 +7,15 @@ import {
   TypeSubsectionHeader,
 } from "@c2fo/components";
 import { Paper } from "@material-ui/core";
-import {SupplierReserveSetting} from "./SupplierReserveSetting"
+import { SupplierReserveSetting } from "./SupplierReserveSetting";
 import { SupplierAPRSetting } from "./SupplierAPRSetting";
+import { supplierInitialMockData } from "./SupplierInitialMockData";
+import {
+  ReserveSettings,
+  SupplierSetting,
+  PayLoadAPRSettings,
+  defaultAprSetting
+} from "./Supplier.schema";
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
@@ -47,16 +54,11 @@ const useStyles = makeStyles<Theme>((theme) => ({
     display: "grid",
   },
   saveButton: {
-    backgroundColor: '#008000',
+    backgroundColor: "#008000",
     padding: theme.spacing(1, 2.5),
     [theme.breakpoints.up("sm")]: {
       padding: theme.spacing(1, 3),
       margin: theme.spacing(2),
-    },
-  },
-  radioButton: {
-    "& .MuiRadio-colorSecondary.Mui-checked": {
-      color: Liquidity.colors.feedback.success,
     },
   },
   sections: {
@@ -70,6 +72,16 @@ const useStyles = makeStyles<Theme>((theme) => ({
 
 const SupplierSettingsSections: React.FC = () => {
   const classes = useStyles();
+  const [supplierData, setSupplierData] = useState<SupplierSetting>(defaultAprSetting);
+  useEffect(() => {
+    setSupplierData(supplierInitialMockData);
+  }, []);
+  const supplierReserveSetting: ReserveSettings =supplierData.reserveSettings;
+  const supplierAPRSetting: SupplierSetting = supplierData;
+
+  function setSupplierAPRSettings(reserveSettings : ReserveSettings){
+    setSupplierData(Object.assign({},supplierData,{reserveSettings}))
+  }
   return (
     <div>
       <Paper className={classes.baseContainer}>
@@ -80,10 +92,10 @@ const SupplierSettingsSections: React.FC = () => {
           </TypeSubsectionHeader>
         </div>
         <Divider />
-        {SupplierAPRSetting()}
+        <SupplierAPRSetting supplierAPRSetting={supplierAPRSetting} />
         <Divider />
       </Paper>
-      <div className={classes.papergap}>      </div>
+      <div className={classes.papergap}> </div>
       <Paper className={classes.baseContainer}>
         <div className={classes.supplierNameContainer}>
           <TypeSubsectionHeader>
@@ -92,7 +104,10 @@ const SupplierSettingsSections: React.FC = () => {
           </TypeSubsectionHeader>
         </div>
         <Divider />
-        {SupplierReserveSetting()}
+        <SupplierReserveSetting
+          supplierReserveSetting={supplierReserveSetting}
+          setSupplierAPRSettings ={setSupplierAPRSettings}
+        />
         <Divider />
       </Paper>
     </div>
