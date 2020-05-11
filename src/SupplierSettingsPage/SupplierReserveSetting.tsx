@@ -1,4 +1,4 @@
-import React, { useState, useCallback,useMemo, useEffect } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   Divider,
   Grid,
@@ -15,10 +15,14 @@ import {
   FormControlLabel,
   TypeBase,
   Checkbox,
-  MenuItem
+  MenuItem,
 } from "@c2fo/components";
-import { ReserveSettings,INVOICE_PRIORITY,RESERVE_TYPE,PayLoadReserveSetting } from "./Supplier.schema";
-import { supplierInitialMockData } from "./SupplierInitialMockData";
+import {
+  ReserveSettings,
+  INVOICE_PRIORITY,
+  RESERVE_TYPE,
+  PayLoadReserveSetting,
+} from "./Supplier.schema";
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
@@ -64,7 +68,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   divider: {
     margin: theme.spacing(0, 0, 2, 0),
   },
-  invoice:{
+  invoice: {
     paddingBottom: theme.spacing(2),
     display: "flex",
   },
@@ -78,59 +82,62 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-let previousSettingsPayload : PayLoadReserveSetting;
+let previousSettingsPayload: PayLoadReserveSetting;
 const CHARACTER_LIMIT = 150;
-
-
 function saveReserveSettings(supplierReserveSetting: ReserveSettings) {
-  previousSettingsPayload = Object.assign({}, supplierReserveSetting,{
-    reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
+  previousSettingsPayload = Object.assign({}, supplierReserveSetting, {
+    reserveType: supplierReserveSetting.reservePercentage
+      ? RESERVE_TYPE.PERCENTAGE
+      : RESERVE_TYPE.AMOUNT,
   });
   // console.log("previousSettingsPayload", previousSettingsPayload);
   // previousSettingsPayload has the saved value of the reserveform
 }
-
 type ResrverProps = {
-  supplierReserveSetting: ReserveSettings,
-  setSupplierAPRSettings: Function
-}
+  supplierReserveSetting: ReserveSettings;
+  setSupplierAPRSettings: Function;
+};
 
-export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSettings }: ResrverProps) => {
+export const SupplierReserveSetting = ({
+  supplierReserveSetting,
+  setSupplierAPRSettings,
+}: ResrverProps) => {
   const classes = useStyles();
   const percentageSymbol = "%";
-  const setSupplierInitialMockData = supplierInitialMockData.reserveSettings;
-
-
-  const reserveType = supplierReserveSetting.reservePercentage ? "reservePercentage" : "reserveAmount"
-
-  const changeSetting = useMemo(() => {
-    if(!previousSettingsPayload){
-      return true ;
-    }
-    else {
-      const currentSettingsPayload:ReserveSettings = Object.assign({}, supplierReserveSetting,{
-        reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
-      });
-      return Object.entries(previousSettingsPayload).toString() === Object.entries(currentSettingsPayload).toString();
-    }
-  },[supplierReserveSetting,previousSettingsPayload])
+  const reserveType = supplierReserveSetting.reservePercentage
+    ? "reservePercentage"
+    : "reserveAmount";
+ const changeSetting = useMemo(() => {
+    if (!previousSettingsPayload) {
+      return true;
+    } else {
+      const currentSettingsPayload: ReserveSettings = Object.assign(
+        {},
+        supplierReserveSetting,
+        {
+          reserveType: supplierReserveSetting.reservePercentage
+            ? RESERVE_TYPE.PERCENTAGE
+            : RESERVE_TYPE.AMOUNT,
+        }  );
+      return (
+        Object.entries(previousSettingsPayload).toString() ===
+        Object.entries(currentSettingsPayload).toString()
+      ); }  }, [supplierReserveSetting, previousSettingsPayload]);
 
   const handleChange = useCallback(
     function (fieldName, fieldValue) {
-      if(!previousSettingsPayload){
-        debugger;
-        previousSettingsPayload= Object.assign({},supplierReserveSetting,{
-          reserveType : supplierReserveSetting.reservePercentage ? RESERVE_TYPE.PERCENTAGE : RESERVE_TYPE.AMOUNT
-        })
+      if (!previousSettingsPayload) {
+        previousSettingsPayload = Object.assign({}, supplierReserveSetting, {
+          reserveType: supplierReserveSetting.reservePercentage
+            ? RESERVE_TYPE.PERCENTAGE
+            : RESERVE_TYPE.AMOUNT,
+        });
       }
       setSupplierAPRSettings(
         Object.assign({}, supplierReserveSetting, {
           [fieldName]: fieldValue,
-        })
-      );
-    },
-    [supplierReserveSetting,previousSettingsPayload]
-  );
+        })  ); },
+    [supplierReserveSetting, previousSettingsPayload] );
   return (
     <Grid container className={classes.supplierContainer}>
       <Grid item xs={12} sm={5} className={classes.labels}>
@@ -195,9 +202,7 @@ export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSe
                       {" "}
                       {percentageSymbol}
                     </InputAdornment>
-                  ), } : {}
-          }
-        />
+                  ),   }: {}  } />
       </Grid>
       <Grid item xs={12} sm={7}></Grid>
       <Grid item xs={12} sm={5} className={classes.labels}>
@@ -234,25 +239,22 @@ export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSe
           select
           name="invoicePriority"
           value={supplierReserveSetting.invoicePriority}
-          onChange={(e) => handleChange("invoicePriority", e.target.value)}
-        >
+          onChange={(e) => handleChange("invoicePriority", e.target.value)}    >
           <MenuItem value={INVOICE_PRIORITY.LOW_TO_HIGH}>
-              {INVOICE_PRIORITY.LOW_TO_HIGH}
-            </MenuItem>
-            <MenuItem value={INVOICE_PRIORITY.HIGH_TO_LOW}>
-              {INVOICE_PRIORITY.HIGH_TO_LOW}
-            </MenuItem>
-          </TextField>
+            {INVOICE_PRIORITY.LOW_TO_HIGH}
+          </MenuItem>
+          <MenuItem value={INVOICE_PRIORITY.HIGH_TO_LOW}>
+            {INVOICE_PRIORITY.HIGH_TO_LOW}
+          </MenuItem>
+        </TextField>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.labels}>
-        <TypeLabel
-          classes={{root: classes.invoice}}>
+        <TypeLabel classes={{ root: classes.invoice }}>
           {/* todo : i18 translation to be done <T k="maker.invoicePriorityDescription"> Invoice priority determine which invoices take precedence in
             covering reserve. </T> */}
           Invoice priority determine which invoices take precedence in covering
           reserve.
         </TypeLabel>
-
         <TypeBase isEmphasis>
           {/* todo : i18 translation to be done <T k="maker.dpeLowestToHighest"> Days paid early lowest to highest </T> */}
           Days paid early lowest to highest
@@ -278,9 +280,7 @@ export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSe
           name="runBeforeAdjustments"
           checked={supplierReserveSetting.runBeforeAdjustments}
           onChange={(e) =>
-            handleChange("runBeforeAdjustments", e.target.checked)
-          }
-        />
+            handleChange("runBeforeAdjustments", e.target.checked)    }  />
         <TypeLabel>
           {/* todo : i18 translation to be done <T k="maker.runBeforeAdjustments"> Run before adjustment </T> */}
           Run before adjustment
@@ -329,5 +329,4 @@ export const SupplierReserveSetting = ({ supplierReserveSetting,setSupplierAPRSe
         </Button>
       </Grid>
     </Grid>
-  );
-};
+  );};
