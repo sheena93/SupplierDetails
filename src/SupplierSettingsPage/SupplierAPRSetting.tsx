@@ -41,6 +41,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   description: {
     display: "flex",
     flexDirection: "row",
+    padding: theme.spacing(2),
     alignItems: "center",
   },
 }));
@@ -81,7 +82,7 @@ export const SupplierAPRSetting = ({ supplierAPRSetting }: APRProps) => {
 
   return (
     <Grid container className={classes.supplierContainer}>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={5}>
         <TextField
           className={classes.textField}
           variant="outlined"
@@ -100,7 +101,7 @@ export const SupplierAPRSetting = ({ supplierAPRSetting }: APRProps) => {
           }}
         />
       </Grid>
-      <Grid item xs={12} sm={6} className={classes.description}>
+      <Grid item xs={12} sm={7} className={classes.description}>
         <TypeLabel data-testid="minimumaprs">
           {/* todo : i18 translation to be done <T k="maker.supplierMinimumAprHelpText"> Minimum APR you are willing to accept from this supplier </T> */}
           Minimum APR you are willing to accept from this supplier

@@ -78,6 +78,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   description: {
     display: "flex",
     flexDirection: "row",
+    padding: theme.spacing(2),
     alignItems: "center",
   },
 }));
@@ -310,8 +311,7 @@ export const SupplierReserveSetting = ({
       <Grid item xs={12} sm={7} className={classes.description}>
         <TypeLabel>
           {/* todo : i18 translation to be done <T k="maker.allowEslapUpdatesDescription">  If checked, this settings can be overwritten by reserve settings in future file loads.</T> */}
-          If checked, this settings can be overwritten by reserve settings in
-          future file loads.
+          If checked, this settings can be overwritten by reserve settings in future file loads.
         </TypeLabel>
       </Grid>
       <Grid item xs={12}>
@@ -322,8 +322,7 @@ export const SupplierReserveSetting = ({
           disabled={changeSetting}
           disableElevation={true}
           color="inherit"
-          onClick={(e) => saveReserveSettings(supplierReserveSetting)}
-        >
+          onClick={(e) => saveReserveSettings(supplierReserveSetting)}>
           {/* todo : i18 translation to be done <T k="maker.save"> Save </T> */}
           Save
         </Button>
