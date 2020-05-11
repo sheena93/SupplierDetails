@@ -15,24 +15,9 @@ const useStyles = makeStyles<Theme>((theme) => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  baseContainer: {
-    borderRadius: 5,
-  },
-  supplierNameContainer: {
-    padding: theme.spacing(2),
-  },
-  bottomContainer: {
-    backgroundColor: Liquidity.colors.greys.background,
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    padding: 8,
-    margin: 2,
-  },
   labels: {
     padding: theme.spacing(2),
   },
-
   textField: {
     flexGrow: 1,
     paddingLeft: theme.spacing(1),
@@ -52,18 +37,6 @@ const useStyles = makeStyles<Theme>((theme) => ({
       padding: theme.spacing(1, 3),
       margin: theme.spacing(2),
     },
-  },
-  radioButton: {
-    "& .MuiRadio-colorSecondary.Mui-checked": {
-      color: Liquidity.colors.feedback.success,
-    },
-  },
-  sections: {
-    paddingLeft: theme.spacing(1),
-    display: "-webkit-box",
-  },
-  radiodisplay: {
-    display: "flow-root",
   },
   description: {
     display: "flex",

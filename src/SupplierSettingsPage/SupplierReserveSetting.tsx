@@ -17,32 +17,16 @@ import {
   Checkbox,
 } from "@c2fo/components";
 import { SupplierAPRSettings } from "./Supplier.schema";
-import { usePrevious } from 'react-use';
 
 const useStyles = makeStyles<Theme>((theme) => ({
   supplierContainer: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
-  baseContainer: {
-    borderRadius: 5,
-  },
-  supplierNameContainer: {
-    padding: theme.spacing(2),
-  },
-  bottomContainer: {
-    backgroundColor: Liquidity.colors.greys.background,
-    display: "flex",
-    flex: 1,
-    flexDirection: "row",
-    padding: 8,
-    margin: 2,
-  },
   labels: {
     padding: theme.spacing(2),
     alignItems: "center",
   },
-
   textField: {
     flexGrow: 1,
     paddingLeft: theme.spacing(1),
@@ -101,7 +85,6 @@ function saveReserveSettings(supplierAPRSettingsObject: SupplierAPRSettings) {
 
 export const SupplierReserveSetting = () => {
   const classes = useStyles();
-
   const defaultState = {
     reserveType: "Percentage",
     reservePercentage: 0,
@@ -110,11 +93,8 @@ export const SupplierReserveSetting = () => {
     runBeforeAdjustment: true,
     allowOverrides: true,
   };
-  const [supplierAPRSettingsObject, setSupplierAPRSettings] = useState<
-    SupplierAPRSettings
-  >(defaultState);
+  const [supplierAPRSettingsObject, setSupplierAPRSettings] = useState<SupplierAPRSettings>(defaultState);
   const percentageSymbol = "%";
-
 
   const changeSetting = useMemo(() => {
     if(!reserveSettings){
@@ -124,7 +104,6 @@ export const SupplierReserveSetting = () => {
       return Object.entries(reserveSettings).toString() === Object.entries(supplierAPRSettingsObject).toString();
     }
   },[supplierAPRSettingsObject,reserveSettings])
-
 
   const handleChange = useCallback(
     function (fieldName, fieldValue) {
@@ -141,11 +120,10 @@ export const SupplierReserveSetting = () => {
   );
 
   const CHARACTER_LIMIT = 150;
-
   return (
     <Grid container className={classes.supplierContainer}>
       <Grid item xs={12} sm={5} className={classes.labels}>
-        <TypeBase isEmphasis>
+        <TypeBase isEmphasis data-testid="reserveType">
           {/* todo : i18 translation to be done <T k="maker.reserveType">  Reserve Type </T> */}
           Reserve Type
         </TypeBase>
@@ -206,9 +184,7 @@ export const SupplierReserveSetting = () => {
                       {" "}
                       {percentageSymbol}
                     </InputAdornment>
-                  ),
-                }
-              : {}
+                  ), } : {}
           }
         />
       </Grid>
@@ -324,6 +300,7 @@ export const SupplierReserveSetting = () => {
         <Button
           variant="contained"
           className={classes.saveButton}
+          data-testid="saveButton"
           disabled={changeSetting}
           disableElevation={true}
           color="inherit"
