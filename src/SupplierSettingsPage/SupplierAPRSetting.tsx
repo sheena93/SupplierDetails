@@ -17,6 +17,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
   labels: {
     padding: theme.spacing(2),
+    alignItems: "center"
   },
   textField: {
     flexGrow: 1,
@@ -32,10 +33,10 @@ const useStyles = makeStyles<Theme>((theme) => ({
   saveButton: {
     backgroundColor: "#008000",
     color: "#FFFFFF",
-    padding: theme.spacing(1, 2.5),
+    padding: theme.spacing(2, 2.5),
     [theme.breakpoints.up("sm")]: {
       padding: theme.spacing(1, 3),
-      margin: theme.spacing(2),
+      margin: theme.spacing(2,0,1,4),
     },
   },
   description: {
@@ -82,7 +83,7 @@ export const SupplierAPRSetting = ({ supplierAPRSetting }: APRProps) => {
 
   return (
     <Grid container className={classes.supplierContainer}>
-      <Grid item xs={12} sm={5}>
+      <Grid item xs={12} sm={5} className={classes.labels}>
         <TextField
           className={classes.textField}
           variant="outlined"

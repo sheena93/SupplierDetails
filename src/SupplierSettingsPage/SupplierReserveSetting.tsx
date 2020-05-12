@@ -50,7 +50,7 @@ const useStyles = makeStyles<Theme>((theme) => ({
     color: "#000000",
     [theme.breakpoints.up("sm")]: {
       padding: theme.spacing(1, 3),
-      margin: theme.spacing(2),
+      margin: theme.spacing(2,0,1,4),
     },
   },
   radioButton: {
@@ -91,7 +91,7 @@ function saveReserveSettings(supplierReserveSetting: ReserveSettings) {
       ? RESERVE_TYPE.PERCENTAGE
       : RESERVE_TYPE.AMOUNT,
   });
-  // console.log("previousSettingsPayload", previousSettingsPayload);
+  console.log("previousSettingsPayload", previousSettingsPayload);
   // previousSettingsPayload has the saved value of the reserveform
 }
 type ResrverProps = {
@@ -242,10 +242,16 @@ export const SupplierReserveSetting = ({
           value={supplierReserveSetting.invoicePriority}
           onChange={(e) => handleChange("invoicePriority", e.target.value)}    >
           <MenuItem value={INVOICE_PRIORITY.LOW_TO_HIGH}>
-            {INVOICE_PRIORITY.LOW_TO_HIGH}
+          <TypeBase>
+          {/* todo : i18 translation to be done <T k="maker.dpeLowestToHighes"> Days Paid Early Lowest to Highest </T> */}
+          Days Paid Early Lowest to Highest
+        </TypeBase>
           </MenuItem>
           <MenuItem value={INVOICE_PRIORITY.HIGH_TO_LOW}>
-            {INVOICE_PRIORITY.HIGH_TO_LOW}
+          <TypeBase>
+          {/* todo : i18 translation to be done <T k="maker.dpeHighestToLowest"> Days Paid Early Highest to Lowest </T> */}
+          Days Paid Early Highest to Lowest
+        </TypeBase>
           </MenuItem>
         </TextField>
       </Grid>
