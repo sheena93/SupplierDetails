@@ -110,6 +110,7 @@ export const SupplierAPRSetting = ({ supplierAPRSetting }: APRProps) => {
       <Grid item xs={12}>
         <Button
           variant="contained"
+          role="savebutton"
           data-testid="saveButton"
           className={classes.saveButton}
           disabled={changeAPRSetting}

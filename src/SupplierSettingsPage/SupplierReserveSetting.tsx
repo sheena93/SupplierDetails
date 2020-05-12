@@ -173,7 +173,7 @@ export const SupplierReserveSetting = ({
         </FormControl>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.description}>
-        <TypeLabel>
+        <TypeLabel data-testid="percentamount">
           {/* todo : i18 translation to be done <T k="maker.supplierReserveQuestion"> Do you want to reserve a percentage of the supplier's total invoice amount,or use specific amount? </T> */}
           Do you want to reserve a percentage of the supplier's total invoice
           amount,or use specific amount?
@@ -207,7 +207,7 @@ export const SupplierReserveSetting = ({
       </Grid>
       <Grid item xs={12} sm={7}></Grid>
       <Grid item xs={12} sm={5} className={classes.labels}>
-        <TypeBase isEmphasis>
+        <TypeBase isEmphasis data-testid="reservereason">
           {/* todo : i18 translation to be done <T k="maker.reserveReason"> Reserve Reason (optional) </T> */}
           Reserve Reason (optional)
         </TypeBase>
@@ -229,7 +229,7 @@ export const SupplierReserveSetting = ({
         <Divider />
       </Grid>
       <Grid item xs={12} sm={5} className={classes.labels}>
-        <TypeBase isEmphasis>
+        <TypeBase isEmphasis data-testid="invoicepriority">
           {/* todo : i18 translation to be done <T k="maker.reserveInvoicePriority"> Invoice Priority </T> */}
           Invoice Priority
         </TypeBase>
@@ -250,25 +250,25 @@ export const SupplierReserveSetting = ({
         </TextField>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.labels}>
-        <TypeLabel classes={{ root: classes.invoice }}>
+        <TypeLabel classes={{ root: classes.invoice }} data-testid="invoicedesc">
           {/* todo : i18 translation to be done <T k="maker.invoicePriorityDescription"> Invoice priority determine which invoices take precedence in
             covering reserve. </T> */}
           Invoice priority determine which invoices take precedence in covering
           reserve.
         </TypeLabel>
-        <TypeBase isEmphasis>
+        <TypeBase isEmphasis data-testid="lowtohigh">
           {/* todo : i18 translation to be done <T k="maker.dpeLowestToHighest"> Days paid early lowest to highest </T> */}
           Days paid early lowest to highest
-        </TypeBase>
-        <TypeLabel>
+        </TypeBase >
+        <TypeLabel data-testid="invoicecloser">
           {/* todo : i18 translation to be done <T k="maker."dpeAscDescription> Invoice with due dates closer to today </T> */}
           Invoice with due dates closer to today
         </TypeLabel>
-        <TypeBase isEmphasis>
+        <TypeBase isEmphasis data-testid="hightolow">
           {/* todo : i18 translation to be done <T k="maker.dpeHighestToLowest"> Days paid early highest to lowest </T> */}
           Days paid early highest to lowest
         </TypeBase>
-        <TypeLabel>
+        <TypeLabel data-testid="invoicefurther">
           {/* todo : i18 translation to be done <T k="maker.dpeDescDescription"> Invoice with due dates farther into the future </T> */}
           Invoice with due dates farther into the future
         </TypeLabel>
@@ -282,13 +282,13 @@ export const SupplierReserveSetting = ({
           checked={supplierReserveSetting.runBeforeAdjustments}
           onChange={(e) =>
             handleChange("runBeforeAdjustments", e.target.checked)    }  />
-        <TypeLabel>
+        <TypeLabel data-testid="runbefore">
           {/* todo : i18 translation to be done <T k="maker.runBeforeAdjustments"> Run before adjustment </T> */}
           Run before adjustment
         </TypeLabel>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.description}>
-        <TypeLabel>
+        <TypeLabel data-testid="reservecalculation">
           {/* todo : i18 translation to be done <T k="maker.runBeforeAdjustmentsDescription"> Should the reserve calculation run before individual invoice adjustments? </T> */}
           Should the reserve calculation run before individual invoice
           adjustments?
@@ -299,23 +299,26 @@ export const SupplierReserveSetting = ({
       </Grid>
       <Grid item xs={12} sm={5} className={classes.Checkbox}>
         <Checkbox
+          data-testid="allowupdate"
           name="allowEslapUpdates"
           checked={supplierReserveSetting.allowEslapUpdates}
           onChange={(e) => handleChange("allowEslapUpdates", e.target.checked)}
         />
-        <TypeLabel>
+        <TypeLabel data-testid="allowaverride">
           {/* todo : i18 translation to be done <T k="maker.allowEslapUpdates"> Allow overrides? </T> */}
           Allow overrides?
         </TypeLabel>
       </Grid>
       <Grid item xs={12} sm={7} className={classes.description}>
-        <TypeLabel>
+        <TypeLabel data-testid="futurefiles">
           {/* todo : i18 translation to be done <T k="maker.allowEslapUpdatesDescription">  If checked, this settings can be overwritten by reserve settings in future file loads.</T> */}
           If checked, this settings can be overwritten by reserve settings in future file loads.
         </TypeLabel>
       </Grid>
       <Grid item xs={12}>
         <Button
+          role="savebutton"
+          name="saveButton"
           variant="contained"
           className={classes.saveButton}
           data-testid="saveButton"

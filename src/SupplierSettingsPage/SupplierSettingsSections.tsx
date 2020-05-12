@@ -43,7 +43,7 @@ const SupplierSettingsSections: React.FC = () => {
     <div>
       <Paper className={classes.baseContainer}>
         <div className={classes.supplierNameContainer}>
-          <TypeSubsectionHeader>
+          <TypeSubsectionHeader data-testid="minimumApr">
             {/* todo : i18 translation to be done <T k="maker.minimumApr"> Minimum APR </T> */}
             Minimum APR
           </TypeSubsectionHeader>
@@ -55,7 +55,7 @@ const SupplierSettingsSections: React.FC = () => {
       <div className={classes.papergap}> </div>
       <Paper className={classes.baseContainer}>
         <div className={classes.supplierNameContainer}>
-          <TypeSubsectionHeader>
+          <TypeSubsectionHeader data-testid="reserve">
             {/* todo : i18 translation to be done <T k="maker.reserve"> Reserve </T> */}
             Reserve
           </TypeSubsectionHeader>
