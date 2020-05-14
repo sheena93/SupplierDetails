@@ -24,6 +24,7 @@ export interface ReserveSettings {
   updated: string;
   reserveReason: string;
   allowEslapUpdates: boolean;
+  reserveType? : string;
 }
 
 export const defaultReserveSetting:ReserveSettings  = {
@@ -37,7 +38,8 @@ export const defaultReserveSetting:ReserveSettings  = {
   runBeforeAdjustments: true,
   allowEslapUpdates: true,
   created: "",
-  updated: ""
+  updated: "",
+  reserveType: ""
 };
 
 export const defaultAprSetting:SupplierSetting ={
@@ -66,9 +68,9 @@ export const defaultAprSetting:SupplierSetting ={
   };
 
 
-  export interface PayLoadReserveSetting extends ReserveSettings {
-   reserveType : string
-  }
+  // export interface PayLoadReserveSetting extends ReserveSettings {
+  //  reserveType : string
+  // }
 
   export interface PayLoadAPRSettings{
     //  divisionId: number;

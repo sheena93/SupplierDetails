@@ -12,7 +12,8 @@ import { supplierInitialMockData } from "./SupplierInitialMockData";
 import {
   ReserveSettings,
   SupplierSetting,
-  defaultAprSetting
+  defaultAprSetting,
+  RESERVE_TYPE
 } from "./Supplier.schema";
 
 const useStyles = makeStyles<Theme>((theme) => ({
@@ -24,20 +25,37 @@ const useStyles = makeStyles<Theme>((theme) => ({
   },
   papergap: {
     padding: theme.spacing(2),
-  }
+  },
 }));
+
+const formatSupplierData = (supplierSetting:SupplierSetting):SupplierSetting => {
+  const supplierReserveSetting: ReserveSettings = supplierSetting.reserveSettings;
+  const currentSettingsPayload: ReserveSettings = Object.assign(
+    {},
+    supplierReserveSetting,
+    {
+      reserveType: supplierReserveSetting.reservePercentage
+        ? RESERVE_TYPE.PERCENTAGE
+        : RESERVE_TYPE.AMOUNT,
+    }
+  );
+  supplierSetting.reserveSettings= currentSettingsPayload;
+  return supplierSetting
+};
 
 const SupplierSettingsSections: React.FC = () => {
   const classes = useStyles();
-  const [supplierData, setSupplierData] = useState<SupplierSetting>(defaultAprSetting);
+  const [supplierData, setSupplierData] = useState<SupplierSetting>(
+    defaultAprSetting
+  );
   useEffect(() => {
-    setSupplierData(supplierInitialMockData);
+    setSupplierData(formatSupplierData(supplierInitialMockData));
   }, []);
-  const supplierReserveSetting: ReserveSettings =supplierData.reserveSettings;
+  const supplierReserveSetting: ReserveSettings = supplierData.reserveSettings;
   const supplierAPRSetting: SupplierSetting = supplierData;
 
-  function setSupplierAPRSettings(reserveSettings : ReserveSettings){
-    setSupplierData(Object.assign({},supplierData,{reserveSettings}))
+  function setSupplierAPRSettings(reserveSettings: ReserveSettings) {
+    setSupplierData(Object.assign({}, supplierData, { reserveSettings }));
   }
   return (
     <div>
@@ -63,7 +81,7 @@ const SupplierSettingsSections: React.FC = () => {
         <Divider />
         <SupplierReserveSetting
           supplierReserveSetting={supplierReserveSetting}
-          setSupplierAPRSettings ={setSupplierAPRSettings}
+          setSupplierAPRSettings={setSupplierAPRSettings}
         />
         <Divider />
       </Paper>
