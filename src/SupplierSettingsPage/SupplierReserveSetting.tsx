@@ -200,6 +200,7 @@ export const SupplierReserveSetting = ({
         <TextField
           className={classes.textField}
           name="reserveReason"
+          data-testid="reserveReason"
           multiline
           rows={3}
           value={supplierReserveSetting.reserveReason}
@@ -275,7 +276,7 @@ export const SupplierReserveSetting = ({
       <Grid item xs={12} sm={5} className={classes.Checkbox}>
         <Checkbox
           name="runBeforeAdjustments"
-          data-testid="runBeforeAdjustments"
+          data-testid="checkboxrun"
           checked={supplierReserveSetting.runBeforeAdjustments}
           onChange={(e) =>
             handleChange("runBeforeAdjustments", e.target.checked)
