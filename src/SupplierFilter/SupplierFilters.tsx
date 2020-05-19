@@ -4,7 +4,6 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-  Grid,
 } from "@c2fo/components";
 
 import { useStyles } from "../Filter/CommonFIlterComponent.style";
@@ -36,8 +35,13 @@ export const SupplierFilters: React.FC<Props> = ({handleQuickFilterChange}) => {
     </Fragment>
   );
 };
-export const useQuickFilter = () =>{
-  const [selectedFilter,setSelectedFilter] = useState<string>("");
+
+
+
+type Hook =(defaultvalue:string)=>[string,(value:string)=>void]
+export const useQuickFilter:Hook = (defaultvalue:string) =>{
+  const [selectedFilter,setSelectedFilter] = useState<string>(defaultvalue);
+  console.log("defaultvalue",defaultvalue)
   const handleQuickFilterChange = useCallback(function(value:string){
     setSelectedFilter(value);
   },[selectedFilter])

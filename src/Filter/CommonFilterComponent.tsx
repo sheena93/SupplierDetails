@@ -2,7 +2,6 @@ import React, { Children, ReactNode } from 'react';
 import {
   Drawer,
   Box,
-  Link,
   Grid,
   Button
 } from '@c2fo/components';
@@ -20,16 +19,17 @@ export const testIds = {
   resetButton: `${TESTID_ROOT}:resetButton`,
 } as const;
 
-type Props = {children : ReactNode ,applyFilter: () => void , resetFilter: () =>void , cancelFilter:() =>void}
-export const FilterDrawerComponent: React.FC<Props>= ({children,applyFilter,resetFilter,cancelFilter}) => {
+type Props = {children : ReactNode ,applyFilter: () => void , resetFilter: () =>void , cancelFilter:() =>void,showDrawer:boolean}
+export const FilterDrawerComponent: React.FC<Props>= ({children,applyFilter,resetFilter,cancelFilter,showDrawer}) => {
   const classes = useStyles();
   return (
         <Drawer
           data-testid="hi"
           anchor="right"
-          open={true}
+          open={showDrawer}
           ModalProps={{
             onBackdropClick: () => {
+              cancelFilter();
             },
           }}
         >
