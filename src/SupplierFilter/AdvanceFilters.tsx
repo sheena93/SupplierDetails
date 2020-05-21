@@ -9,21 +9,27 @@ import {
 } from "@c2fo/components";
 
 import { useStyles } from "../Filter/CommonFIlterComponent.style";
-import { MultiFilterComponent } from "../MultiSelectFilter/index";
+import { MultiFilterComponent,useMultiSelectFilter } from "../MultiSelectFilter/index";
 import {
   SupplierInformation,
   ElligibleAp,
   OfferInformation,
   ClearingApr,
+  ClearingDpe,
+  NonclearingApr,
+  NonclearingDpe
 } from "../SupplierFilter/SupplierFilters.schema";
 
-export const AdvanceFilters: React.FC = () => {
+
+
+type Props = { handleMultiselectFilterChange: Function };
+export const AdvanceFilters: React.FC<Props> = (handleMultiselectFilterChange) => {
   const classes = useStyles();
   function openDrawer() {}
   return (
     <Fragment>
-      <Grid item xs={12} sm={6}>
         <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }}>
+        <Grid item xs={12} sm={6}>
           <ExpansionPanelSummary
             expandIcon={<AngleDownIcon />}
             className={classes.advancedOptions}
@@ -37,6 +43,7 @@ export const AdvanceFilters: React.FC = () => {
               Advance Filter
             </TypeBase>
           </ExpansionPanelSummary>
+          </Grid>
           <ExpansionPanelDetails
             classes={{ root: classes.expansionPanelDetailsRoot }}
           >
@@ -53,7 +60,7 @@ export const AdvanceFilters: React.FC = () => {
             ></MultiFilterComponent>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </Grid>
+      
     </Fragment>
   );
 };

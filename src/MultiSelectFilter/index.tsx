@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useCallback,useState } from "react";
 import {
   Box,
   ExpansionPanel,
@@ -38,30 +38,55 @@ export const MultiFilterComponent: React.FC<props> = ({
 
   return (
     <div className={classes.drawer}>
-     
       <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }}>
-        <ExpansionPanelSummary
-          expandIcon={<AngleDownIcon />}
-          className={classes.advancedOptions}
-          classes={{
-            root: classes.expansionPanelSummaryRoot,
-            content: classes.expansionPanelSummaryContent,
-          }}
-        ><Grid item xs={12} sm={12}> 
-               <Box className={classes.QuickFilterTitle}>
-          <TypeBase>{title}</TypeBase>
-          </Box>
-          </Grid>
-        </ExpansionPanelSummary>
+        <Box className={classes.AdvanceFilterTitle}>
+          <ExpansionPanelSummary
+            expandIcon={<AngleDownIcon />}
+            className={classes.advancedOptions}
+            classes={{
+              root: classes.expansionPanelSummaryRoot,
+              content: classes.expansionPanelSummaryContent,
+            }}
+          >
+            <TypeBase>{title}</TypeBase>
+          </ExpansionPanelSummary>
+        </Box>
+
         <ExpansionPanelDetails
           classes={{ root: classes.expansionPanelDetailsRoot }}
-        > 
+        >
           <FormControl component="fieldset" className={classes.formControl}>
             <FormGroup>{optionList}</FormGroup>
           </FormControl>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-     
     </div>
   );
 };
+
+
+export interface Statetype{
+    [key:string] : boolean
+}
+
+type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, (event: React.ChangeEvent<HTMLInputElement>) => void];
+function getOptionsState(options:Array<QuickFiltersInterface>): Statetype{
+  const list:Statetype ={};
+   options.map ((option) =>{
+     list[option.value] = false
+})
+return list
+}
+export const useMultiSelectFilter: Hook = (options) => {
+  const [selectedFilter, setSelectedFilter] = useState<Statetype>(
+    getOptionsState(options)
+    );
+  const handleMultiselectFilterChange = useCallback(
+    function (event: React.ChangeEvent<HTMLInputElement>) {
+      setSelectedFilter({ ...selectedFilter, [event.target.name]: event.target.checked });
+    },
+    [selectedFilter]
+  );
+  return [selectedFilter, handleMultiselectFilterChange];
+};
+

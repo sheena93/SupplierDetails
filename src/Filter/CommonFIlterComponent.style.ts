@@ -31,6 +31,14 @@ export const useStyles = makeStyles<Theme>(theme => ({
     padding: theme.spacing(1.5),
     fontSize: theme.typography.pxToRem(15),
   },
+
+  AdvanceFilterTitle: {
+    backgroundColor: Liquidity.colors.greys.light,
+    padding: theme.spacing(1),
+    margin: theme.spacing(1,0,0,0),
+    fontSize: theme.typography.pxToRem(15),
+  },
+
   card: {
     padding: theme.spacing(2),
   },
@@ -88,7 +96,9 @@ export const useStyles = makeStyles<Theme>(theme => ({
     },
   },
   expansionPanelDetailsRoot: {
-    padding: theme.spacing(0, 0, 0, 2),
+    padding: theme.spacing(1, 0, 0, 1),
+    display: "flex",
+    flexDirection: "column"
   },
 
   advanceFiltertitle: {

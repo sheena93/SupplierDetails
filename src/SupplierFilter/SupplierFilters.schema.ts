@@ -9,7 +9,6 @@ export interface QuickFiltersInterface {
     value : string
 }
 
-
 export const SupplierInformation: Array<QuickFiltersInterface>=[
     {lable :  "Is Registered", value :"isregistered"},
     {lable :  "Is not Registered", value :"isnotregistered"},
@@ -33,8 +32,29 @@ export const OfferInformation: Array<QuickFiltersInterface>=[
 ]
 
 export const ClearingApr: Array<QuickFiltersInterface>=[
-    {lable :  "3.00% or Less", value :"3.0%orless"},
-    {lable :  "3.00% to 5.99%", value :"hasnotplacedoffer"},
-    {lable :  "6.00% to 8.99%", value :"offerclearning"},
-    {lable :  "9.00% or more", value :"offernotclearning"}
+    {lable :  "3.00% or Less", value :"3.0%orlessclearning"},
+    {lable :  "3.00% to 5.99%", value :"3to5clearning"},
+    {lable :  "6.00% to 8.99%", value :"6to8clearing"},
+    {lable :  "9.00% or more", value :"9ormoreclearning"}
+]
+
+export const ClearingDpe: Array<QuickFiltersInterface>=[
+    {lable :  "10 or Less", value :"10orlessclearning"},
+    {lable :  "10 to 19.99", value :"10to19clearning"},
+    {lable :  "20 to 29.99", value :"20to29clearning"},
+    {lable :  "30 or more", value :"30ormoreclearning"}
+]
+
+export const NonclearingApr: Array<QuickFiltersInterface>=[
+    {lable :  "3.00% or Less", value :"3.0%orlessnonclearning"},
+    {lable :  "3.00% to 5.99%", value :"3to5nonclearning"},
+    {lable :  "6.00% to 8.99%", value :"6to8nonclearing"},
+    {lable :  "9.00% or more", value :"9ormorenonclearning"}
+]
+
+export const NonclearingDpe: Array<QuickFiltersInterface>=[
+    {lable :  "10 or Less", value :"10orlessnonclearning"},
+    {lable :  "10 to 19.99", value :"10to19nonclearning"},
+    {lable :  "20 to 29.99", value :"20to29nonclearning"},
+    {lable :  "30 or more", value :"30ormorenonclearning"}
 ]
