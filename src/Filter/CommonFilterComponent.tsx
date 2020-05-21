@@ -19,8 +19,15 @@ export const testIds = {
   resetButton: `${TESTID_ROOT}:resetButton`,
 } as const;
 
-type Props = {children : ReactNode ,applyFilter: () => void , resetFilter: () =>void , cancelFilter:() =>void,showDrawer:boolean}
-export const FilterDrawerComponent: React.FC<Props>= ({children,applyFilter,resetFilter,cancelFilter,showDrawer}) => {
+interface TestProps {
+  children : ReactNode,
+  applyFilter: () => void,
+  resetFilter: () =>void,
+  cancelFilter?: () =>void,
+  showDrawer:boolean
+}
+
+export const FilterDrawerComponent: React.FC<TestProps>= ({children,applyFilter,resetFilter,cancelFilter,showDrawer}) => {
   const classes = useStyles();
   return (
         <Drawer
@@ -29,7 +36,7 @@ export const FilterDrawerComponent: React.FC<Props>= ({children,applyFilter,rese
           open={showDrawer}
           ModalProps={{
             onBackdropClick: () => {
-              cancelFilter();
+              cancelFilter && cancelFilter();
             },
           }}
         >

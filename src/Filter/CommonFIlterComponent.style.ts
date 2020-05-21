@@ -72,4 +72,31 @@ export const useStyles = makeStyles<Theme>(theme => ({
     paddingTop: theme.spacing(5),
     textTransform: 'uppercase',
   },
+  expansionPanelRoot: {
+    boxShadow: 'none',
+  },
+  expansionPanelSummaryRoot: {
+    padding: 0,
+    '&.Mui-expanded': {
+      minHeight: 0,
+    },
+  },
+  expansionPanelSummaryContent: {
+    margin: 0,
+    '&.Mui-expanded': {
+      margin: 0,
+    },
+  },
+  expansionPanelDetailsRoot: {
+    padding: theme.spacing(0, 0, 0, 2),
+  },
+
+  advanceFiltertitle: {
+    color: Liquidity.colors.main.midBlue,
+    fontSize: theme.typography.pxToRem(14),
+    fontWeight: 'bold',
+    paddingLeft: theme.spacing(2),
+    paddingTop: theme.spacing(1),
+    textTransform: 'uppercase',
+  },
 }));
