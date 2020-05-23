@@ -9,10 +9,12 @@ export interface QuickFiltersInterface {
     value : string
 }
 
+export const hasap:string = "hasap"
+
 export const SupplierInformation: Array<QuickFiltersInterface>=[
     {lable :  "Is Registered", value :"isregistered"},
     {lable :  "Is not Registered", value :"isnotregistered"},
-    {lable :  "Has AP", value :"hasap"},
+    {lable :  "Has AP", value :hasap},
     {lable :  "Does not have AP", value :"havenoap"}
 ]
 

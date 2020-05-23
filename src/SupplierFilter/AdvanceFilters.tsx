@@ -9,7 +9,7 @@ import {
 } from "@c2fo/components";
 
 import { useStyles } from "../Filter/CommonFIlterComponent.style";
-import { MultiFilterComponent,useMultiSelectFilter } from "../MultiSelectFilter/index";
+import { MultiFilterComponent,useMultiSelectFilter,handleChangeType } from "../MultiSelectFilter/index";
 import {
   SupplierInformation,
   ElligibleAp,
@@ -17,15 +17,20 @@ import {
   ClearingApr,
   ClearingDpe,
   NonclearingApr,
-  NonclearingDpe
+  NonclearingDpe,
+  hasap
 } from "../SupplierFilter/SupplierFilters.schema";
+import {useAdvanceFilterHook,AdvanceFiltertype} from "./AdvanceFilterHook"
 
 
 
-type Props = { handleMultiselectFilterChange: Function };
-export const AdvanceFilters: React.FC<Props> = (handleMultiselectFilterChange) => {
+
+export const AdvanceFilters: React.FC = () => {
   const classes = useStyles();
   function openDrawer() {}
+  const filterHook:AdvanceFiltertype|null = useAdvanceFilterHook();
+  const {supplier,setSupplier,elligibleAp,setElligibleAp,offerinfo,setOfferinfor,setClearingApr}= filterHook || {}
+
   return (
     <Fragment>
         <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }}>
@@ -50,13 +55,22 @@ export const AdvanceFilters: React.FC<Props> = (handleMultiselectFilterChange) =
             <MultiFilterComponent
               title="Supplier Infomation"
               options={SupplierInformation}
-              handleChange={openDrawer}
+              handleChange={setSupplier}
+              value={supplier}
             ></MultiFilterComponent>
-
+        {supplier && supplier[hasap] &&
+            <MultiFilterComponent
+              title="Elligible AP"
+              options={ElligibleAp}
+              handleChange={setElligibleAp}
+              value={elligibleAp}
+             ></MultiFilterComponent> }
+          
             <MultiFilterComponent
               title="Offer Infomation"
               options={OfferInformation}
-              handleChange={openDrawer}
+              handleChange={setOfferinfor}
+              value={offerinfo}
             ></MultiFilterComponent>
           </ExpansionPanelDetails>
         </ExpansionPanel>

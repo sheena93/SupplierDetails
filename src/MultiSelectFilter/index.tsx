@@ -13,24 +13,29 @@ import {
 } from "@c2fo/components";
 import { QuickFiltersInterface } from "../SupplierFilter/SupplierFilters.schema";
 import { useStyles } from ".././Filter/CommonFIlterComponent.style";
-import { Grid } from "@material-ui/core";
+
+
+export type handleChangeType= (event: React.ChangeEvent<HTMLInputElement>) => void
+export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType];
 
 type props = {
   options: Array<QuickFiltersInterface>;
   title: string;
-  handleChange: () => void;
+  handleChange: handleChangeType|undefined;
+  value: Statetype | undefined;
 };
 export const MultiFilterComponent: React.FC<props> = ({
   options = [],
   title,
   handleChange,
+  value = {}
 }) => {
   const classes = useStyles();
 
   const optionList = options.map((option) => (
     <FormControlLabel
       control={
-        <Checkbox checked={true} onChange={handleChange} name={option.value} />
+        <Checkbox checked={value[option.value]} onChange={handleChange} name={option.value} />
       }
       label={option.lable}
     />
@@ -69,7 +74,6 @@ export interface Statetype{
     [key:string] : boolean
 }
 
-type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, (event: React.ChangeEvent<HTMLInputElement>) => void];
 function getOptionsState(options:Array<QuickFiltersInterface>): Statetype{
   const list:Statetype ={};
    options.map ((option) =>{

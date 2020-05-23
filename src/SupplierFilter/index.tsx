@@ -5,6 +5,7 @@ import { MultiFilterComponent } from "../MultiSelectFilter/index";
 import { Button } from "@c2fo/components";
 import { useStyles } from "../Filter/CommonFIlterComponent.style";
 import { AdvanceFilters } from "./AdvanceFilters";
+import { withAdvanceFilterProvider } from "./AdvanceFilterHook"
 
 const RenderDrawer: React.FC = () => {
   const classes = useStyles();
@@ -50,4 +51,5 @@ const RenderDrawer: React.FC = () => {
   );
 };
 
-export default RenderDrawer;
+
+export default withAdvanceFilterProvider(RenderDrawer);
