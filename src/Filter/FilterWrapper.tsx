@@ -33,8 +33,7 @@ export const FilterDrawerComponent: React.FC<TestProps>= ({children,applyFilter,
         <Drawer
           data-testid={testIds.drawer}
           anchor="right"
-          // open={showDrawer}
-          open = {true}
+          open={showDrawer}
           ModalProps={{
             onBackdropClick: () => {
               cancelFilter && cancelFilter();
