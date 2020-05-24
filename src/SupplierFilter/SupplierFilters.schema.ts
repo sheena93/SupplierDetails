@@ -10,6 +10,8 @@ export interface QuickFiltersInterface {
 }
 
 export const hasap:string = "hasap"
+export const offerclearning:string ="offerclearning"
+export const offernotclearning:string ="offernotclearning"
 
 export const SupplierInformation: Array<QuickFiltersInterface>=[
     {lable :  "Is Registered", value :"isregistered"},
@@ -29,8 +31,8 @@ export const ElligibleAp: Array<QuickFiltersInterface>=[
 export const OfferInformation: Array<QuickFiltersInterface>=[
     {lable :  "Has placed offer", value :"hasplacedoffer"},
     {lable :  "Has not placed offer", value :"hasnotplacedoffer"},
-    {lable :  "Offer is clearing", value :"offerclearning"},
-    {lable :  "Offer is not clearing", value :"offernotclearning"}
+    {lable :  "Offer is clearing", value :offerclearning},
+    {lable :  "Offer is not clearing", value :offernotclearning}
 ]
 
 export const ClearingApr: Array<QuickFiltersInterface>=[

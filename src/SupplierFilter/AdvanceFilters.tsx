@@ -18,7 +18,7 @@ import {
   ClearingDpe,
   NonclearingApr,
   NonclearingDpe,
-  hasap
+  hasap,offerclearning,offernotclearning
 } from "../SupplierFilter/SupplierFilters.schema";
 import {useAdvanceFilterHook,AdvanceFiltertype} from "./AdvanceFilterHook"
 
@@ -27,9 +27,8 @@ import {useAdvanceFilterHook,AdvanceFiltertype} from "./AdvanceFilterHook"
 
 export const AdvanceFilters: React.FC = () => {
   const classes = useStyles();
-  function openDrawer() {}
   const filterHook:AdvanceFiltertype|null = useAdvanceFilterHook();
-  const {supplier,setSupplier,elligibleAp,setElligibleAp,offerinfo,setOfferinfor,setClearingApr}= filterHook || {}
+  const {supplier,setSupplier,elligibleAp,setElligibleAp,offerinfo,setOfferinfor,clearingApr,setClearingApr,clearingDpe,setClearingDpe,nonclearingApr,setNonclearingApr,nonclearingDpe,setNonclearingDpe}= filterHook || {}
 
   return (
     <Fragment>
@@ -65,13 +64,41 @@ export const AdvanceFilters: React.FC = () => {
               handleChange={setElligibleAp}
               value={elligibleAp}
              ></MultiFilterComponent> }
-          
             <MultiFilterComponent
               title="Offer Infomation"
               options={OfferInformation}
               handleChange={setOfferinfor}
               value={offerinfo}
             ></MultiFilterComponent>
+            {offerinfo && offerinfo[offerclearning] &&
+            <div>
+              <MultiFilterComponent
+              title="Clearning APR"
+              options={ClearingApr}
+              handleChange={setClearingApr}
+              value={clearingApr}
+            ></MultiFilterComponent>
+              <MultiFilterComponent
+              title="Clearning DPE"
+              options={ClearingDpe}
+              handleChange={setClearingDpe}
+              value={clearingDpe}
+            ></MultiFilterComponent> </div>}
+
+          {offerinfo && offerinfo[offernotclearning] &&
+            <div>
+              <MultiFilterComponent
+              title="Non-Clearning APR"
+              options={NonclearingApr}
+              handleChange={setNonclearingApr}
+              value={nonclearingApr}
+            ></MultiFilterComponent>
+              <MultiFilterComponent
+              title="Non-Clearning DPE"
+              options={NonclearingDpe}
+              handleChange={setNonclearingDpe}
+              value={nonclearingDpe}
+            ></MultiFilterComponent> </div>}
           </ExpansionPanelDetails>
         </ExpansionPanel>
       
