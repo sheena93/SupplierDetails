@@ -28,7 +28,7 @@ import {useAdvanceFilterHook,AdvanceFiltertype} from "./AdvanceFilterHook"
 export const AdvanceFilters: React.FC = () => {
   const classes = useStyles();
   const filterHook:AdvanceFiltertype|null = useAdvanceFilterHook();
-  const {supplier,setSupplier,elligibleAp,setElligibleAp,offerinfo,setOfferinfor,clearingApr,setClearingApr,clearingDpe,setClearingDpe,nonclearingApr,setNonclearingApr,nonclearingDpe,setNonclearingDpe}= filterHook || {}
+  const {resetState,supplier,setSupplier,elligibleAp,setElligibleAp,offerinfo,setOfferinfor,clearingApr,setClearingApr,clearingDpe,setClearingDpe,nonclearingApr,setNonclearingApr,nonclearingDpe,setNonclearingDpe}= filterHook || {}
 
   return (
     <Fragment>

@@ -33,6 +33,7 @@ export const useAdvanceFilterHook = () => {
 
 export interface AdvanceFiltertype{
   // [key:string] : handleChangeType | Statetype
+    resetState: ()=>void;
     supplier: Statetype;
     setSupplier: handleChangeType;
     elligibleAp: Statetype;
@@ -50,14 +51,28 @@ export interface AdvanceFiltertype{
 }
 
 function useProvideAdvanceFilter() : AdvanceFiltertype {
-  const [supplier, setSupplier]    = useMultiSelectFilter(SupplierInformation);
-  const [elligibleAp, setElligibleAp]   = useMultiSelectFilter(ElligibleAp);
-  const [offerinfo, setOfferinfor]   = useMultiSelectFilter(OfferInformation);
-  const [clearingApr, setClearingApr]   = useMultiSelectFilter(ClearingApr);
-  const [clearingDpe, setClearingDpe]   = useMultiSelectFilter(ClearingDpe);
-  const [nonclearingApr, setNonclearingApr]   = useMultiSelectFilter(NonclearingApr);
-  const [nonclearingDpe, setNonclearingDpe]   = useMultiSelectFilter(NonclearingDpe);
-  return {supplier, setSupplier,elligibleAp, setElligibleAp,offerinfo, setOfferinfor,clearingApr, setClearingApr,clearingDpe, setClearingDpe,nonclearingApr, setNonclearingApr,nonclearingDpe, setNonclearingDpe}
+  const [supplier, setSupplier,resetSupplier]    = useMultiSelectFilter(SupplierInformation);
+  const [elligibleAp, setElligibleAp,resetElligibleAp]   = useMultiSelectFilter(ElligibleAp);
+  const [offerinfo, setOfferinfor,resetOfferInfo]   = useMultiSelectFilter(OfferInformation);
+  const [clearingApr, setClearingApr,resetClearingApr]   = useMultiSelectFilter(ClearingApr);
+  const [clearingDpe, setClearingDpe,resetClearingDpe]   = useMultiSelectFilter(ClearingDpe);
+  const [nonclearingApr, setNonclearingApr,resetNonClearingApr]   = useMultiSelectFilter(NonclearingApr);
+  const [nonclearingDpe, setNonclearingDpe,resetNonClearingDpe]   = useMultiSelectFilter(NonclearingDpe);
+
+  function getCurrentState() {
+         
+  }
+  function resetState() {
+    resetSupplier();  
+    resetElligibleAp();
+    resetOfferInfo();
+    resetClearingApr();
+    resetClearingDpe();
+    resetNonClearingApr();
+    resetNonClearingDpe();
+  }
+  
+  return {resetState,supplier, setSupplier,elligibleAp, setElligibleAp,offerinfo, setOfferinfor,clearingApr, setClearingApr,clearingDpe, setClearingDpe,nonclearingApr, setNonclearingApr,nonclearingDpe, setNonclearingDpe}
 }
 
 export function withAdvanceFilterProvider(Component:React.FC){

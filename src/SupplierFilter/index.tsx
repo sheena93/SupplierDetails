@@ -5,15 +5,19 @@ import { MultiFilterComponent } from "../MultiSelectFilter/index";
 import { Button } from "@c2fo/components";
 import { useStyles } from "../Filter/CommonFIlterComponent.style";
 import { AdvanceFilters } from "./AdvanceFilters";
-import { withAdvanceFilterProvider } from "./AdvanceFilterHook"
+import { withAdvanceFilterProvider,useAdvanceFilterHook,AdvanceFiltertype } from "./AdvanceFilterHook"
 
 const RenderDrawer: React.FC = () => {
   const classes = useStyles();
   const [showDrawer, setshowDrawer] = useState(false);
   const [selectedFilter, setSelectedFilter] = useQuickFilter("allsuppliers");
 
+  const filterHook:AdvanceFiltertype|null = useAdvanceFilterHook();
+  const {resetState} = filterHook || {};
+  
   function resetFilter() {
     setSelectedFilter("");
+    resetState && resetState();
   }
   function applyFilter() {
     console.log("Saved filter value", selectedFilter);

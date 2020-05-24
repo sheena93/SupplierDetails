@@ -16,7 +16,7 @@ import { useStyles } from ".././Filter/CommonFIlterComponent.style";
 
 
 export type handleChangeType= (event: React.ChangeEvent<HTMLInputElement>) => void
-export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType];
+export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType, ()=> void];
 
 type props = {
   options: Array<QuickFiltersInterface>;
@@ -91,6 +91,10 @@ export const useMultiSelectFilter: Hook = (options) => {
     },
     [selectedFilter]
   );
-  return [selectedFilter, handleMultiselectFilterChange];
+
+  function resetFilter(){
+    setSelectedFilter(getOptionsState(options))
+  }
+  return [selectedFilter, handleMultiselectFilterChange,resetFilter];
 };
 
