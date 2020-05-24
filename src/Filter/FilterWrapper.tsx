@@ -12,11 +12,11 @@ import {useStyles} from './FIlterWrapper.style';
 const TESTID_ROOT = 'custom-filters';
 export const testIds = {
   root: TESTID_ROOT,
-  filterButton: `${TESTID_ROOT}:filterButton`,
+  drawer: `${TESTID_ROOT}:drawercomponent`,
   applyButton: `${TESTID_ROOT}:applyButton`,
-  rightDrawer: `${TESTID_ROOT}:rightDrawer`,
   cancelButton: `${TESTID_ROOT}:cancelButton`,
   resetButton: `${TESTID_ROOT}:resetButton`,
+
 } as const;
 
 interface TestProps {
@@ -31,7 +31,7 @@ export const FilterDrawerComponent: React.FC<TestProps>= ({children,applyFilter,
   const classes = useStyles();
   return (
         <Drawer
-          data-testid="drawercomponent"
+          data-testid={testIds.drawer}
           anchor="right"
           // open={showDrawer}
           open = {true}
