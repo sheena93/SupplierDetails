@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
   Drawer,
   Box,
@@ -6,7 +6,7 @@ import {
   Button
 } from '@c2fo/components';
 
-import {useStyles} from './CommonFIlterComponent.style';
+import {useStyles} from './FilterWrapper.style';
 
 
 const TESTID_ROOT = 'custom-filters';
@@ -34,6 +34,9 @@ export const FilterDrawerComponent: React.FC<TestProps>= ({children,applyFilter,
           data-testid="hi"
           anchor="right"
           open={showDrawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
           ModalProps={{
             onBackdropClick: () => {
               cancelFilter && cancelFilter();

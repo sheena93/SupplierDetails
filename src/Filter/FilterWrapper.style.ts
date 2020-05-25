@@ -12,10 +12,16 @@ export const useStyles = makeStyles<Theme>(theme => ({
     display: 'flex',
   },
   drawer: {
-    width: '300px',
+    width: '350px',
     '@media (min-width: 350px)': {
       width: '350px',
     },
+  },
+
+  drawerPaper: {
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    height: "100%",
   },
   radioGroupContainer: {
     paddingLeft: theme.spacing(2),
@@ -34,7 +40,6 @@ export const useStyles = makeStyles<Theme>(theme => ({
 
   AdvanceFilterTitle: {
     backgroundColor: Liquidity.colors.greys.light,
-    padding: theme.spacing(1),
     margin: theme.spacing(1,0,0,0),
     fontSize: theme.typography.pxToRem(15),
   },
@@ -90,17 +95,25 @@ export const useStyles = makeStyles<Theme>(theme => ({
     },
   },
   expansionPanelSummaryContent: {
+    margin: theme.spacing(0, 0, 0, 1),
+    '&.Mui-expanded': {
+      margin: theme.spacing(0, 0, 0, 1),
+    },
+  },
+  expansionPanelSummaryContentAdvance: {
     margin: 0,
     '&.Mui-expanded': {
       margin: 0,
     },
   },
   expansionPanelDetailsRoot: {
-    padding: theme.spacing(1, 0, 0, 1),
+    padding: theme.spacing(1, 0, 0, 0),
     display: "flex",
     flexDirection: "column"
   },
-
+  formControl:{
+    padding: theme.spacing(0, 0, 0, 2),
+  },
   advanceFiltertitle: {
     color: Liquidity.colors.main.midBlue,
     fontSize: theme.typography.pxToRem(14),

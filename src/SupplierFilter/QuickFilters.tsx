@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useCallback } from "react";
 import { Box, RadioGroup, Radio, FormControlLabel } from "@c2fo/components";
 
-import { useStyles } from "../Filter/CommonFIlterComponent.style";
+import { useStyles } from "../Filter/FilterWrapper.style";
 import { QuickFiltersOptions } from "./SupplierFilters.schema";
 
 type Props = { handleQuickFilterChange: Function };

@@ -4,7 +4,7 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Container from "./Container";
 import { BasePage } from "./BasePage/BasePage";
-import RenderDrawer from "./SupplierFilter/index"
+import RenderDrawer from "./SupplierFilter/RenderDrawer"
 
 
 ReactDOM.render(

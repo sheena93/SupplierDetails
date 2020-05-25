@@ -1,4 +1,4 @@
-import React, { useCallback,useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Box,
   ExpansionPanel,
@@ -12,16 +12,17 @@ import {
   Checkbox,
 } from "@c2fo/components";
 import { QuickFiltersInterface } from "../SupplierFilter/SupplierFilters.schema";
-import { useStyles } from ".././Filter/CommonFIlterComponent.style";
+import { useStyles } from "../Filter/FilterWrapper.style";
 
 
-export type handleChangeType= (event: React.ChangeEvent<HTMLInputElement>) => void
-export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType, ()=> void];
+export type handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => void
+export type resetFilterType = (restoreState?: Statetype) => void
+export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType, resetFilterType];
 
 type props = {
   options: Array<QuickFiltersInterface>;
   title: string;
-  handleChange: handleChangeType|undefined;
+  handleChange: handleChangeType | undefined;
   value: Statetype | undefined;
 };
 export const MultiFilterComponent: React.FC<props> = ({
@@ -70,21 +71,22 @@ export const MultiFilterComponent: React.FC<props> = ({
 };
 
 
-export interface Statetype{
-    [key:string] : boolean
+export interface Statetype {
+  [key: string]: boolean
 }
 
-function getOptionsState(options:Array<QuickFiltersInterface>): Statetype{
-  const list:Statetype ={};
-   options.map ((option) =>{
-     list[option.value] = false
-})
-return list
+function getOptionsState(options: Array<QuickFiltersInterface>): Statetype {
+  const list: Statetype = {};
+  options.map((option) => {
+    list[option.value] = false
+  })
+  return list
 }
 export const useMultiSelectFilter: Hook = (options) => {
   const [selectedFilter, setSelectedFilter] = useState<Statetype>(
     getOptionsState(options)
-    );
+  );
+  
   const handleMultiselectFilterChange = useCallback(
     function (event: React.ChangeEvent<HTMLInputElement>) {
       setSelectedFilter({ ...selectedFilter, [event.target.name]: event.target.checked });
@@ -92,9 +94,12 @@ export const useMultiSelectFilter: Hook = (options) => {
     [selectedFilter]
   );
 
-  function resetFilter(){
-    setSelectedFilter(getOptionsState(options))
+  const resetFilter: resetFilterType = (restoreState) => {
+    if (restoreState) {
+      setSelectedFilter(restoreState);
+    } else {
+      setSelectedFilter(getOptionsState(options))
+    }
   }
-  return [selectedFilter, handleMultiselectFilterChange,resetFilter];
+  return [selectedFilter, handleMultiselectFilterChange, resetFilter];
 };
-
