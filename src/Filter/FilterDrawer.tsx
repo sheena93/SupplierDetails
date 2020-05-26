@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Box, Button, Divider, Drawer, Grid, TypeBase } from '@c2fo/components';
 
-import {useStyles} from "./FIlterWrapper.style";
+import {useStyles} from "./FilterWrapper.style";
 
 const TESTID_ROOT = 'filterDrawer';
 export const testIds = {
@@ -31,7 +31,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
       <Drawer
           data-testid={testIds.drawer}
           anchor="right"
-          open={true}
+          open={showDrawer}
           classes={{
             paper: classes.drawerPaper,
           }}

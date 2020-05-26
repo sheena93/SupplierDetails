@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/dom';
 import { fireEvent, render } from '@testing-library/react';
 
-import {FilterDrawerComponent, testIds} from "./FilterWrapper";
+import {FilterDrawer, testIds} from "./FilterDrawer";
 
 const cancelFilter = jest.fn();
 const applyFilter = jest.fn();
@@ -11,14 +11,14 @@ const childText = 'Test';
 
 const renderFilterDrawer = (showDrawer: boolean = true) => {
   render(
-      <FilterDrawerComponent
+      <FilterDrawer
           applyFilter={applyFilter}
           resetFilter={resetFilter}
           cancelFilter={cancelFilter}
           showDrawer={showDrawer}
       >
         <div>{childText}</div>
-      </FilterDrawerComponent>,
+      </FilterDrawer>,
   );
 };
 

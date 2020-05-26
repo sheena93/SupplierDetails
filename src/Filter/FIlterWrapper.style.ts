@@ -5,7 +5,6 @@ export const useStyles = makeStyles<Theme>(theme => ({
     padding: theme.spacing(2, 3),
   },
   filterButtons: {
-    marginTop: theme.spacing(15),
     padding: theme.spacing(4, 3),
   },
   applyButton: {
