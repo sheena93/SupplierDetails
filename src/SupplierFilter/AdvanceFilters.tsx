@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@c2fo/components";
 
-import { useStyles } from "../Filter/FilterWrapper.style";
+import { useStyles } from "../SupplierFilter/SupplierFilter.style";
 import { MultiFilterComponent } from "../MultiSelectFilter/MultiFilterWrapper";
 import {
   SupplierInformation,
@@ -28,7 +28,6 @@ export const AdvanceFilters: React.FC = () => {
   const classes = useStyles();
   const filterHook: AdvanceFiltertype | null = useAdvanceFilterHook();
   const {
-    resetState,
     supplier,
     setSupplier,
     elligibleAp,
@@ -59,6 +58,7 @@ export const AdvanceFilters: React.FC = () => {
           >
             <TypeBase classes={{ root: classes.advanceFiltertitle }}>
               {" "}
+               {/* todo add translation */}
               Advance Filter
             </TypeBase>
           </ExpansionPanelSummary>

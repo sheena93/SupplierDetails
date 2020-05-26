@@ -53,10 +53,10 @@ export interface AdvanceFiltertype {
   nonclearingDpe: Statetype;
   setNonclearingDpe: handleChangeType;
   restorePreviousState: () => void;
-  applyFilterState: () => void;
+  applyFilterState: () => previousStateType | null;
 }
 
-interface previousStateType {
+export interface previousStateType {
   supplier: Statetype;
   elligibleAp: Statetype;
   offerinfo: Statetype;
@@ -123,8 +123,9 @@ function useProvideAdvanceFilter(): AdvanceFiltertype {
       nonclearingApr,
       nonclearingDpe,
     };
-    // make api call using previousAdvancedFilterState
+    // make api call using previousAdvancedFilterState and remove the below two lines
     console.log("previousAdvancedFilterState", previousAdvancedFilterState);
+    return previousAdvancedFilterState;
   }
 
   return {

@@ -12,12 +12,16 @@ import {
   Checkbox,
 } from "@c2fo/components";
 import { QuickFiltersInterface } from "../SupplierFilter/SupplierFilters.schema";
-import { useStyles } from "../Filter/FilterWrapper.style";
+import { useStyles } from "../SupplierFilter/SupplierFilter.style";
 
 
 export type handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => void
 export type resetFilterType = (restoreState?: Statetype) => void
 export type Hook = (options: Array<QuickFiltersInterface>) => [Statetype, handleChangeType, resetFilterType];
+
+export interface Statetype {
+  [key: string]: boolean
+}
 
 type props = {
   options: Array<QuickFiltersInterface>;
@@ -25,6 +29,9 @@ type props = {
   handleChange: handleChangeType | undefined;
   value: Statetype | undefined;
 };
+
+
+
 export const MultiFilterComponent: React.FC<props> = ({
   options = [],
   title,
@@ -39,12 +46,13 @@ export const MultiFilterComponent: React.FC<props> = ({
         <Checkbox checked={value[option.value]} onChange={handleChange} name={option.value} />
       }
       label={option.lable}
+      key={option.value}
     />
   ));
 
   return (
-    <div className={classes.drawer}>
-      <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }}>
+    <div>
+      <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }} defaultExpanded={true}>
         <Box className={classes.AdvanceFilterTitle}>
           <ExpansionPanelSummary
             expandIcon={<AngleDownIcon />}
@@ -69,11 +77,6 @@ export const MultiFilterComponent: React.FC<props> = ({
     </div>
   );
 };
-
-
-export interface Statetype {
-  [key: string]: boolean
-}
 
 function getOptionsState(options: Array<QuickFiltersInterface>): Statetype {
   const list: Statetype = {};

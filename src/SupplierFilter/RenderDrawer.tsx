@@ -1,33 +1,36 @@
 import React, { useState } from "react";
-import { FilterDrawerComponent } from "../Filter/FilterWrapper";
-import { QuickFilters, useQuickFilter } from "./QuickFilters";
+import { FilterDrawer } from "../Filter/FilterWrapper";
+import { QuickFilters} from "./QuickFilters";
+import {useQuickFilter} from "./QuickFilterHook"
 import { Button } from "@c2fo/components";
-import { useStyles } from "../Filter/FilterWrapper.style";
+import { useStyles } from "../SupplierFilter/SupplierFilter.style";
 import { AdvanceFilters } from "./AdvanceFilters";
 import {
   withAdvanceFilterProvider,
   useAdvanceFilterHook,
   AdvanceFiltertype,
 } from "./AdvanceFilterHook";
+import {previousStateType} from "./AdvanceFilterHook"
 
 const RenderDrawer: React.FC = () => {
   const classes = useStyles();
   const [showDrawer, setshowDrawer] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useQuickFilter("allsuppliers");
+  const [quickFilter, setQuickFilter] = useQuickFilter("allsuppliers");
 
   const filterHook: AdvanceFiltertype | null = useAdvanceFilterHook();
   const { resetState, applyFilterState, restorePreviousState } =
     filterHook || {};
 
   function resetFilter() {
-    setSelectedFilter("");
+    setQuickFilter("");
     resetState && resetState();
     // filterHook?.resetState();
     setshowDrawer(false);
   }
   function applyFilter() {
-    console.log("Saved filter value", selectedFilter);
-    applyFilterState && applyFilterState();
+    console.log("Saved filter value", quickFilter);
+    // applyFilterState && applyFilterState();
+    callApplyFilterAPI(quickFilter,applyFilterState ? applyFilterState() : undefined);
     setshowDrawer(false);
   }
   function cancelFilter() {
@@ -35,7 +38,7 @@ const RenderDrawer: React.FC = () => {
     setshowDrawer(false);
   }
   function handleQuickFilterChange(value: string) {
-    setSelectedFilter(value);
+    setQuickFilter(value);
   }
   function openDrawer() {
     setshowDrawer(true);
@@ -43,6 +46,7 @@ const RenderDrawer: React.FC = () => {
 
   return (
     <div>
+       {/* remove the button and call openDrawer on the actual button in application from where the filter drawer need to get open */}
       <Button
         className={classes.applyButton}
         size="large"
@@ -51,16 +55,24 @@ const RenderDrawer: React.FC = () => {
       >
         Filter
       </Button>
-      <FilterDrawerComponent
+      <FilterDrawer
         {...{ applyFilter, resetFilter, cancelFilter, showDrawer }}
       >
         <QuickFilters
           handleQuickFilterChange={handleQuickFilterChange}
+          selectedValue ={quickFilter}
+
         ></QuickFilters>
         <AdvanceFilters />
-      </FilterDrawerComponent>
+      </FilterDrawer>
     </div>
   );
 };
 
 export default withAdvanceFilterProvider(RenderDrawer);
+
+function callApplyFilterAPI(QuickFilterState:string,AdvanceFIlterState?:previousStateType | null){
+  const FilterObject= AdvanceFIlterState ? {...AdvanceFIlterState,QuickFilter:QuickFilterState}: {QuickFilter:QuickFilterState}
+  console.log("FilterObject",FilterObject)
+  //Fetch URL and pass this object FilterObject
+  }
