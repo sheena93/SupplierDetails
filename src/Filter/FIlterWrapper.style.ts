@@ -20,4 +20,28 @@ export const useStyles = makeStyles<Theme>(theme => ({
     margin: theme.spacing(5, 2),
     textTransform: 'uppercase',
   },
+  drawerPaper: {
+    height: "100%",
+    overflowY: "hidden",
+    overflowX: "hidden",
+  },
+  Drawerchildren: {
+    height: "90%",
+    overflowY: "auto",
+    overflowX: "hidden",
+  },
+  spacer: {
+    display: "flex",
+    flexGrow: 1,
+  },
+  drawer: {
+    width: "300px",
+    "@media (min-width: 300px)": {
+      width: "375px",
+    },
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "inherit",
+  },
 }));

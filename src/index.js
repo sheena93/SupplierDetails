@@ -4,14 +4,14 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Container from "./Container";
 import { BasePage } from "./BasePage/BasePage";
-import {FilterDrawerComponent} from "./Filter/FilterWrapper"
+import {FilterDrawer} from "./Filter/FilterWrapper"
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BasePage>
       <Container>
-          <FilterDrawerComponent/>
+          <FilterDrawer/>
       </Container>
     </BasePage>
   </React.StrictMode>,

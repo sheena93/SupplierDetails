@@ -18,7 +18,7 @@ type FilterDrawerProps = {
   cancelFilter?: () => void;
 };
 
-export const FilterDrawerComponent: React.FC<FilterDrawerProps & ReactNode> = ({
+export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
                                                                         children,
                                                                         showDrawer,
                                                                         applyFilter,
@@ -31,7 +31,10 @@ export const FilterDrawerComponent: React.FC<FilterDrawerProps & ReactNode> = ({
       <Drawer
           data-testid={testIds.drawer}
           anchor="right"
-          open={showDrawer}
+          open={true}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
           ModalProps={
             cancelFilter
                 ? {
@@ -50,7 +53,7 @@ export const FilterDrawerComponent: React.FC<FilterDrawerProps & ReactNode> = ({
             </TypeBase>
           </Box>
           <Divider />
-          <div> {children} </div>
+          <div className={classes.Drawerchildren}> {children}
           <Button
               className={classes.resetFilters}
               data-testid={testIds.resetButton}
@@ -61,6 +64,8 @@ export const FilterDrawerComponent: React.FC<FilterDrawerProps & ReactNode> = ({
             {/* todo add translation */}
             Reset Filters
           </Button>
+          </div>
+          <div  className={classes.spacer}></div>
           <Grid container className={classes.filterButtons} spacing={1}>
             <Grid item sm="auto" xs={12}>
               <Button
