@@ -46,16 +46,17 @@ export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
           : {}
       }
     >
-      <div className={classes.drawer}>
+      <Grid className={classes.drawer}>
         <Box className={classes.addFiltersTitle}>
           <TypeBase isEmphasis>
             {/* todo add translation */}
             {/* <T k="core.addFilters">ADD FILTERS</T> */}
-            ADD FILTERS
+            Add Filters
           </TypeBase>
         </Box>
         <Divider />
-        <div className={classes.Drawerchildren}> {children} 
+        <div className={classes.drawerchildren}> {children} 
+        <Grid item sm="auto" xs={12}>
         <Button
           className={classes.resetFilters}
           data-testid={testIds.resetButton}
@@ -67,8 +68,9 @@ export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
           {/* <T k="core.resetFilter">Reset Filters</T> */}
           Reset Filters
         </Button>
+        </Grid>
         </div>
-        <div  className={classes.spacer}></div>
+        <div  className={classes.spacer}/>
         <Grid container className={classes.filterButtons} spacing={1}>
           <Grid item sm="auto" xs={12}>
             <Button
@@ -96,7 +98,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
             </Button>
           </Grid>
         </Grid>
-      </div>
+      </Grid>
     </Drawer>
   );
 };

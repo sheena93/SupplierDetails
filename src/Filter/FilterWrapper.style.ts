@@ -3,12 +3,15 @@ import { Liquidity, makeStyles, Theme } from '@c2fo/components';
 export const useStyles = makeStyles<Theme>(theme => ({
   addFiltersTitle: {
     padding: theme.spacing(2, 3),
+    textTransform: 'uppercase',
   },
   filterButtons: {
-    padding: theme.spacing(4, 3),
+    padding: theme.spacing(4,0),
+    justifyContent: "center",
+    alignItems:"center",
   },
   applyButton: {
-    padding: theme.spacing(1, 6),
+    padding: theme.spacing(1, 6)
   },
   cancelButton: {
     background: Liquidity.colors.greys.light,
@@ -24,7 +27,7 @@ export const useStyles = makeStyles<Theme>(theme => ({
     overflowY: "hidden",
     overflowX: "hidden",
   },
-  Drawerchildren: {
+  drawerchildren: {
     height: "90%",
     overflowY: "auto",
     overflowX: "hidden",
