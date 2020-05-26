@@ -1,102 +1,52 @@
-import React from "react";
-import { screen } from "@testing-library/dom";
-import { FilterDrawerComponent } from "./FilterWrapper";
-import { render, fireEvent, act } from "@testing-library/react";
+import React from 'react';
+import { screen } from '@testing-library/dom';
+import { fireEvent, render } from '@testing-library/react';
+
+import {FilterDrawerComponent, testIds} from "./FilterWrapper";
 
 const cancelFilter = jest.fn();
 const applyFilter = jest.fn();
 const resetFilter = jest.fn();
+const childText = 'Test';
 
-describe("<FilterDrawerComponent />", () => {
-  it("should render with required props and show drawer true", async () => {
-    render(
+const renderFilterDrawer = (showDrawer: boolean = true) => {
+  render(
       <FilterDrawerComponent
-        applyFilter={applyFilter}
-        resetFilter={resetFilter}
-        cancelFilter={cancelFilter}
-        showDrawer={true}
-        children
-      />
-    );
-    expect(FilterDrawerComponent).toMatchSnapshot();
-    
-  });
-  it("should render with required props and show drawer false and children <div>", async () => {
-    render(
-      <FilterDrawerComponent
-        applyFilter={applyFilter}
-        resetFilter={resetFilter}
-        cancelFilter={cancelFilter}
-        showDrawer={false}
-        children ={<div></div>}
-      />
-    );
-    expect(FilterDrawerComponent).toMatchSnapshot();
-  });
-
-  it("should render FilterDrawerComponent multiple children", async () => {
-    await act(async () => {
-      await render(
-        <FilterDrawerComponent
           applyFilter={applyFilter}
           resetFilter={resetFilter}
           cancelFilter={cancelFilter}
-          showDrawer={true}
-          children = {[<div></div>,<div></div>]}
-        />
-      );
-    });
+          showDrawer={showDrawer}
+      >
+        <div>{childText}</div>
+      </FilterDrawerComponent>,
+  );
+};
+
+describe('FilterDrawerComponent', () => {
+  it('should render FilterDrawerComponent', async () => {
+    renderFilterDrawer();
+    expect(screen.getByTestId(testIds.drawer)).toBeInTheDocument();
+    expect(screen.getByText(childText)).toBeInTheDocument();
   });
 
-  it("should handle Apply click", async () => {
-    await act(async () => {
-      await render(
-        <FilterDrawerComponent
-          applyFilter={applyFilter}
-          resetFilter={resetFilter}
-          cancelFilter={cancelFilter}
-          showDrawer={true}
-          children
-        />
-      );
-      const applyButton = screen.getByText("Apply");
-      fireEvent.click(applyButton);
-      expect(applyFilter).toBeCalled();
-    });
+  it('should handle Apply click', async () => {
+    renderFilterDrawer();
+    const applyButton = screen.getByTestId(testIds.applyButton);
+    fireEvent.click(applyButton);
+    expect(applyFilter).toBeCalled();
   });
 
-  it("should handle Reset click", async () => {
-    await act(async () => {
-      await render(
-        <FilterDrawerComponent
-          applyFilter={applyFilter}
-          resetFilter={resetFilter}
-          cancelFilter={cancelFilter}
-          showDrawer={true}
-          children
-        />
-      );
-      const resetButton = screen.getByText("Reset Filters");
-      fireEvent.click(resetButton);
-      expect(resetFilter).toBeCalled();
-    });
+  it('should handle Cancel click', async () => {
+    renderFilterDrawer();
+    const cancelButton = screen.getByTestId(testIds.cancelButton);
+    fireEvent.click(cancelButton);
+    expect(cancelFilter).toBeCalled();
   });
 
-  it("should handle Cancel click", async () => {
-    await act(async () => {
-      await render(
-        <FilterDrawerComponent
-          applyFilter={applyFilter}
-          resetFilter={resetFilter}
-          cancelFilter={cancelFilter}
-          showDrawer={true}
-          children
-        />
-      );
-      const cancelbutton = screen.getByText("Cancel");
-      fireEvent.click(cancelbutton);
-      expect(cancelFilter).toBeCalled();
-    });
+  it('should handle Reset click', async () => {
+    renderFilterDrawer();
+    const resetButton = screen.getByTestId(testIds.resetButton);
+    fireEvent.click(resetButton);
+    expect(resetFilter).toBeCalled();
   });
-
 });

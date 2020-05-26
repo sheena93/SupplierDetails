@@ -1,93 +1,92 @@
 import React, { ReactNode } from 'react';
-import {
-  Drawer,
-  Box,
-  Grid,
-  Button
-} from '@c2fo/components';
+import { Box, Button, Divider, Drawer, Grid, TypeBase } from '@c2fo/components';
 
-import {useStyles} from './FIlterWrapper.style';
+import {useStyles} from "./FIlterWrapper.style";
 
-
-const TESTID_ROOT = 'custom-filters';
+const TESTID_ROOT = 'filterDrawer';
 export const testIds = {
-  root: TESTID_ROOT,
-  drawer: `${TESTID_ROOT}:drawercomponent`,
+  drawer: `${TESTID_ROOT}:drawerComponent`,
   applyButton: `${TESTID_ROOT}:applyButton`,
   cancelButton: `${TESTID_ROOT}:cancelButton`,
   resetButton: `${TESTID_ROOT}:resetButton`,
-
 } as const;
 
-interface TestProps {
-  children : ReactNode,
-  applyFilter: () => void,
-  resetFilter: () =>void,
-  cancelFilter?: () =>void,
-  showDrawer:boolean
-}
+type FilterDrawerProps = {
+  showDrawer: boolean;
+  applyFilter: () => void;
+  resetFilter: () => void;
+  cancelFilter?: () => void;
+};
 
-export const FilterDrawerComponent: React.FC<TestProps>= ({children,applyFilter,resetFilter,cancelFilter,showDrawer}) => {
+export const FilterDrawerComponent: React.FC<FilterDrawerProps & ReactNode> = ({
+                                                                        children,
+                                                                        showDrawer,
+                                                                        applyFilter,
+                                                                        resetFilter,
+                                                                        cancelFilter,
+                                                                      }) => {
   const classes = useStyles();
+
   return (
-        <Drawer
+      <Drawer
           data-testid={testIds.drawer}
           anchor="right"
           open={showDrawer}
-          ModalProps={{
-            onBackdropClick: () => {
-              cancelFilter && cancelFilter();
-            },
-          }}
-        >
-          <div className={classes.drawer}>
-            <Box className={classes.addFiltersTitle}>
-              {/* <T k="addFilters"> ADD FILTERS </T> */}
+          ModalProps={
+            cancelFilter
+                ? {
+                  onBackdropClick: () => {
+                    cancelFilter();
+                  },
+                }
+                : {}
+          }
+      >
+        <div className={classes.drawer}>
+          <Box className={classes.addFiltersTitle}>
+            <TypeBase isEmphasis>
+              {/* todo add translation */}
               ADD FILTERS
-            </Box>
-            <div>
-              {children}
-            </div>
-            <Box className={classes.resetFilters}>
+            </TypeBase>
+          </Box>
+          <Divider />
+          <div> {children} </div>
+          <Button
+              className={classes.resetFilters}
+              data-testid={testIds.resetButton}
+              variant="text"
+              color="secondary"
+              onClick={resetFilter}
+          >
+            {/* todo add translation */}
+            Reset Filters
+          </Button>
+          <Grid container className={classes.filterButtons} spacing={1}>
+            <Grid item sm="auto" xs={12}>
               <Button
-                  data-testid={testIds.resetButton}
-                  size="large"
-                  variant="text"
-                  color="secondary"
-                  onClick={resetFilter}
-                >
-                  {/* <T k="core.cancel">Cancel</T> */}
-                  Reset Filters
-                </Button>
-            </Box>
-            <Grid className={classes.filterButtons} container>
-              <Grid item xs={6}>
-                <Button
                   data-testid={testIds.cancelButton}
                   className={classes.cancelButton}
                   size="large"
                   variant="text"
                   color="secondary"
                   onClick={cancelFilter}
-                >
-                  {/* <T k="core.cancel">Cancel</T> */}
-                  Cancel
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
+              >
+                Cancel
+              </Button>
+            </Grid>
+            <Grid item sm="auto" xs={12}>
+              <Button
                   data-testid={testIds.applyButton}
                   className={classes.applyButton}
                   size="large"
                   variant="contained"
                   onClick={applyFilter}
-                >
-                  {/* <T k="core.apply">Apply</T> */}
-                  Apply
-                </Button>
-              </Grid>
+              >
+                Apply
+              </Button>
             </Grid>
-            </div>
-        </Drawer>
-      )}
- 
+          </Grid>
+        </div>
+      </Drawer>
+  );
+};
