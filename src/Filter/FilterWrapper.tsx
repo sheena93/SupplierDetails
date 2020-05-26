@@ -68,6 +68,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps & ReactNode> = ({
           Reset Filters
         </Button>
         </div>
+        <div  className={classes.spacer}></div>
         <Grid container className={classes.filterButtons} spacing={1}>
           <Grid item sm="auto" xs={12}>
             <Button

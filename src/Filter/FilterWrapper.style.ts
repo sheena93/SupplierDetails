@@ -1,29 +1,34 @@
-import { Liquidity, makeStyles, Theme } from '@c2fo/components';
+import { Liquidity, makeStyles, Theme } from "@c2fo/components";
 
+export const useStyles = makeStyles<Theme>((theme) => ({
 
-export const useStyles = makeStyles<Theme>(theme => ({
-  drawer: {
-    width: '350px',
-    '@media (min-width: 350px)': {
-      width: '350px',
-    },
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"space-between"
-  },
   drawerPaper: {
-    overflowX: 'hidden',
-    overflowY: 'auto',
     height: "100%",
+    overflowY: "hidden",
+  },
+  Drawerchildren: {
+    height: "90%",
+    overflowY: "auto",
+    overflowX: "hidden",
+  },
+  spacer: {
+    display: "flex",
+    flexGrow: 1,
   },
   addFiltersTitle: {
     fontSize: theme.typography.pxToRem(18),
     padding: theme.spacing(2),
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
-  filterTitle: {
-    float: 'right',
-    display: 'inline',
+  drawer: {
+    width: "300px",
+    "@media (min-width: 300px)": {
+      width: "375px",
+    },
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "inherit",
   },
   filterButtons: {
     padding: theme.spacing(4, 1),
@@ -42,9 +47,9 @@ export const useStyles = makeStyles<Theme>(theme => ({
   resetFilters: {
     color: Liquidity.colors.main.midBlue,
     fontSize: theme.typography.pxToRem(14),
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingLeft: theme.spacing(2),
     paddingTop: theme.spacing(5),
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 }));

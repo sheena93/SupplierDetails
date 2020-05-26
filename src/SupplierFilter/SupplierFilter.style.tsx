@@ -8,21 +8,6 @@ export const useStyles = makeStyles<Theme>(theme => ({
     spacingBottom: 0,
     paddingLeft: theme.spacing(1),
   },
-  filterIcon: {
-    display: 'flex',
-  },
-  drawer: {
-    width: '350px',
-    '@media (min-width: 350px)': {
-      width: '350px',
-    },
-  },
-
-  drawerPaper: {
-    overflowX: 'hidden',
-    overflowY: 'auto',
-    height: "100%",
-  },
   radioGroupContainer: {
     paddingLeft: theme.spacing(2),
     color: Liquidity.colors.main.midBlue,

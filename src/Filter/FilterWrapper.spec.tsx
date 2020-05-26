@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/dom';
 import { fireEvent, render } from '@testing-library/react';
 
-import { FilterDrawer, testIds } from './FilterDrawer';
+import { FilterDrawer, testIds } from './FilterWrapper';
 
 const cancelFilter = jest.fn();
 const applyFilter = jest.fn();
