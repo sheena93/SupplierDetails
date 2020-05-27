@@ -4,14 +4,14 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Container from "./Container";
 import { BasePage } from "./BasePage/BasePage";
-import {PriorityComponent} from "./ContactManager/PriorityComponent"
+import {VendorInfoTableBody} from "./ContactManager/VendorInfoTableBody"
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BasePage>
       <Container>
-          <PriorityComponent priority={2}/>
+          <VendorInfoTableBody/>
       </Container>
     </BasePage>
   </React.StrictMode>,
