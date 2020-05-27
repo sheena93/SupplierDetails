@@ -4,14 +4,14 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Container from "./Container";
 import { BasePage } from "./BasePage/BasePage";
-import {FilterDrawer} from "./Filter/FilterDrawer"
+import {PriorityComponent} from "./ContactManager/PriorityComponent"
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BasePage>
       <Container>
-          <FilterDrawer/>
+          <PriorityComponent priority={2}/>
       </Container>
     </BasePage>
   </React.StrictMode>,

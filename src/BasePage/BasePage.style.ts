@@ -21,7 +21,7 @@ export const useStyles = makeStyles<Theme>(theme => ({
         flexShrink: 0,
     },
     body: {
-        backgroundColor: Liquidity.colors.main.secondary,
+        backgroundColor: "white",
     },
     footerContainer: {
         backgroundColor: Liquidity.colors.main.darkBlue,
