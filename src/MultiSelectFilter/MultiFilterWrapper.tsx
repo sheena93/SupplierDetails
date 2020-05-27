@@ -30,7 +30,10 @@ type props = {
   value: Statetype | undefined;
 };
 
-
+const TESTID_ROOT = 'multiFilterDrawer';
+export const testIds = {
+  advanceFilter: `${TESTID_ROOT}:advanceFilter`,
+} as const;
 
 export const MultiFilterComponent: React.FC<props> = ({
   options = [],
@@ -43,7 +46,7 @@ export const MultiFilterComponent: React.FC<props> = ({
   const optionList = options.map((option) => (
     <FormControlLabel
       control={
-        <Checkbox checked={value[option.value]} onChange={handleChange} name={option.value} />
+        <Checkbox checked={value[option.value]} onChange={handleChange} name={option.value} data-testid={option.value} />
       }
       label={option.lable}
       key={option.value}
@@ -69,7 +72,7 @@ export const MultiFilterComponent: React.FC<props> = ({
         <ExpansionPanelDetails
           classes={{ root: classes.expansionPanelDetailsRoot }}
         >
-          <FormControl component="fieldset" className={classes.formControl}>
+          <FormControl className={classes.formControl} data-testid={testIds.advanceFilter}>
             <FormGroup>{optionList}</FormGroup>
           </FormControl>
         </ExpansionPanelDetails>

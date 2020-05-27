@@ -20,7 +20,7 @@ export const QuickFilters: React.FC<Props> = ({ handleQuickFilterChange,selected
 
   return (
     <Fragment>
-      <Box className={classes.QuickFilterTitle}>
+      <Box className={classes.QuickFilterTitle} data-testid="quickFilterTitle">
          {/* todo add translation */}
         Quick Filters
       </Box>
