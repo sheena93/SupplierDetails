@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import SupplierStats from './SupplierStats';
+import SupplierSettingsSections from './SupplierSettingsPage/SupplierSettingsSections';
 import * as serviceWorker from './serviceWorker';
 import Container from "./Container";
 import {BasePage} from "./BasePage/BasePage";
@@ -10,7 +10,7 @@ ReactDOM.render(
     <React.StrictMode>
         <BasePage>
             <Container>
-                <SupplierStats/>
+                <SupplierSettingsSections/>
             </Container>
         </BasePage>
     </React.StrictMode>,
