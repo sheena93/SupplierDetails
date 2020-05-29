@@ -67,10 +67,11 @@ export const AdvanceFilters: React.FC = () => {
           classes={{ root: classes.expansionPanelDetailsRoot }}
         >
           <MultiFilterComponent
-            title="Supplier Infomation"
+            title="Supplier Information"
             options={SupplierInformation}
             handleChange={setSupplier}
             value={supplier}
+            data-testid="supplierInformation"
           ></MultiFilterComponent>
           {supplier && supplier[hasap] && (
             <MultiFilterComponent
@@ -81,7 +82,7 @@ export const AdvanceFilters: React.FC = () => {
             ></MultiFilterComponent>
           )}
           <MultiFilterComponent
-            title="Offer Infomation"
+            title="Offer Information"
             options={OfferInformation}
             handleChange={setOfferinfor}
             value={offerinfo}

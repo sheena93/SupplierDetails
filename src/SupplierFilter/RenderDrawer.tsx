@@ -12,7 +12,7 @@ import {
 } from "./AdvanceFilterHook";
 import {previousStateType} from "./AdvanceFilterHook"
 
-const RenderDrawer: React.FC = () => {
+export const RenderDrawer: React.FC = () => {
   const classes = useStyles();
   const [showDrawer, setshowDrawer] = useState(false);
   const [quickFilter, setQuickFilter] = useQuickFilter("allsuppliers");
@@ -24,12 +24,9 @@ const RenderDrawer: React.FC = () => {
   function resetFilter() {
     setQuickFilter("");
     resetState && resetState();
-    // filterHook?.resetState();
     setshowDrawer(false);
   }
   function applyFilter() {
-    console.log("Saved filter value", quickFilter);
-    // applyFilterState && applyFilterState();
     callApplyFilterAPI(quickFilter,applyFilterState ? applyFilterState() : undefined);
     setshowDrawer(false);
   }
@@ -52,6 +49,7 @@ const RenderDrawer: React.FC = () => {
         size="large"
         variant="contained"
         onClick={openDrawer}
+        data-testid="filterButton"
       >
         Filter
       </Button>

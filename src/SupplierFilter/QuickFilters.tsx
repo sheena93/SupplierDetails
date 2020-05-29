@@ -15,6 +15,7 @@ export const QuickFilters: React.FC<Props> = ({ handleQuickFilterChange,selected
       value={quickFilterLinks.value}
       onChange={() => handleQuickFilterChange(quickFilterLinks.value)}
       control={<Radio />}
+      data-testid={quickFilterLinks.value}
     />
   ));
 
