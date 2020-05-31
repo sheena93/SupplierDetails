@@ -26,7 +26,7 @@ const renderMultiFilterComponent = () => {
 };
 
 describe("FilterDrawerComponent", () => {
-  it("should render FilterDrawerComponent", async () => {
+  it("should render FilterDrawerComponent",() => {
     renderMultiFilterComponent();
     expect(screen.getByTestId(testIds.advanceFilter)).toBeInTheDocument();
     expect(screen.getByTestId("isregistered")).toBeInTheDocument();
@@ -37,8 +37,8 @@ describe("FilterDrawerComponent", () => {
 });
 
 describe("FilterDrawerComponent checkboxes check and uncheck", () => {
-it('Renders renderMultiFilterComponent and isregistered checkbox', async () => {
-  await renderMultiFilterComponent();
+it('Renders renderMultiFilterComponent and isregistered checkbox', () => {
+   renderMultiFilterComponent();
   const isregistered = screen
     .getByTestId('isregistered')
     .querySelector('input[type="checkbox"]') as HTMLElement;
@@ -48,8 +48,8 @@ it('Renders renderMultiFilterComponent and isregistered checkbox', async () => {
   expect(isregistered).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and isnotregistered checkbox', async () => {
-  await renderMultiFilterComponent();
+it('Renders renderMultiFilterComponent and isnotregistered checkbox', () => {
+   renderMultiFilterComponent();
   const isnotregistered = screen
     .getByTestId('isnotregistered')
     .querySelector('input[type="checkbox"]') as HTMLElement;
@@ -59,8 +59,8 @@ it('Renders renderMultiFilterComponent and isnotregistered checkbox', async () =
   expect(isnotregistered).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and hasap checkbox', async () => {
-  await renderMultiFilterComponent();
+it('Renders renderMultiFilterComponent and hasap checkbox', () => {
+   renderMultiFilterComponent();
   const hasap = screen
     .getByTestId('hasap')
     .querySelector('input[type="checkbox"]') as HTMLElement;
@@ -70,8 +70,8 @@ it('Renders renderMultiFilterComponent and hasap checkbox', async () => {
   expect(hasap).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and havenoap checkbox', async () => {
-  await renderMultiFilterComponent();
+it('Renders renderMultiFilterComponent and havenoap checkbox',  () => {
+   renderMultiFilterComponent();
   const havenoap = screen
     .getByTestId('havenoap')
     .querySelector('input[type="checkbox"]') as HTMLElement;

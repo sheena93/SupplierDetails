@@ -79,6 +79,7 @@ export const AdvanceFilters: React.FC = () => {
               options={ElligibleAp}
               handleChange={setElligibleAp}
               value={elligibleAp}
+              data-testid="elligibleap"
             ></MultiFilterComponent>
           )}
           <MultiFilterComponent
@@ -86,6 +87,7 @@ export const AdvanceFilters: React.FC = () => {
             options={OfferInformation}
             handleChange={setOfferinfor}
             value={offerinfo}
+            data-testid="offerInformation"
           ></MultiFilterComponent>
           {offerinfo && offerinfo[offerclearning] && (
             <div>

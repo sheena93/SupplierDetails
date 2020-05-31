@@ -19,6 +19,8 @@ describe("RenderDrawerComponent", () => {
         RenderDrawerComponent();
         const filterButton = screen.getByTestId("filterButton");
         fireEvent.click(filterButton);
-        expect(screen.getByText('Add Filters')).toBeVisible()
+        expect(screen.getByText('Add Filters')).toBeVisible();
+        expect(screen.getByText("Apply")).toBeInTheDocument();
+        expect(screen.getByText("Cancel")).toBeInTheDocument();
       });
 });

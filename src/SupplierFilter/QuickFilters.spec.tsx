@@ -24,7 +24,7 @@ const renderQuickFilterComponent = () => {
 };
 
 describe("FilterDrawerComponent", () => {
-  it("should render FilterDrawerComponent", async () => {
+  it("should render FilterDrawerComponent", () => {
     renderQuickFilterComponent();
     expect(screen.getByTestId("quickFilterTitle")).toBeInTheDocument();
     expect(screen.getByTestId("allsuppliers")).toBeInTheDocument();
@@ -34,8 +34,8 @@ describe("FilterDrawerComponent", () => {
 });
 
 describe("renderQuickFilterComponent and check for radio buttons", () => {
-  it("Renders renderQuickFilterComponent and All Suppliers Radio button", async () => {
-    await renderQuickFilterComponent();
+  it("Renders renderQuickFilterComponent and All Suppliers Radio button", () => {
+     renderQuickFilterComponent();
     const allsuppliers = screen
       .getByTestId("allsuppliers")
       .querySelector('input[type="radio"]') as HTMLElement;
@@ -43,8 +43,8 @@ describe("renderQuickFilterComponent and check for radio buttons", () => {
     expect(allsuppliers).not.toBeChecked();
   });
 
-  it("Renders renderQuickFilterComponent and Current Market Radio button", async () => {
-    await renderQuickFilterComponent();
+  it("Renders renderQuickFilterComponent and Current Market Radio button",  () => {
+     renderQuickFilterComponent();
     const currentmarket = screen
       .getByTestId("currentmarket")
       .querySelector('input[type="radio"]') as HTMLElement;
@@ -53,8 +53,8 @@ describe("renderQuickFilterComponent and check for radio buttons", () => {
     expect(handleQuickFilterChange).toHaveBeenCalledWith("currentmarket");
   });
 
-  it("Renders renderQuickFilterComponent and Non Clearing Radio button", async () => {
-    await renderQuickFilterComponent();
+  it("Renders renderQuickFilterComponent and Non Clearing Radio button",  () => {
+     renderQuickFilterComponent();
     const nonclearing = screen
       .getByTestId("nonclearing")
       .querySelector('input[type="radio"]') as HTMLElement;
