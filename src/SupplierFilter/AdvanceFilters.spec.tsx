@@ -30,7 +30,7 @@ describe("AdvanceFiltersComponent", () => {
    expect(screen.getByText("Does not have AP")).toBeInTheDocument();
  });
 
- it('Check Advance Filter options ',  () => {
+ it('Check Advance Filter offer options ',  () => {
   AdvanceFiltersComponent();
  const advanceFilter = screen.getByText("Advance Filter")
  fireEvent.click(advanceFilter);
