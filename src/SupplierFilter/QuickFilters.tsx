@@ -11,7 +11,7 @@ export const QuickFilters: React.FC<Props> = ({ handleQuickFilterChange,selected
   const quickFilterLinks = QuickFiltersOptions.map((quickFilterLinks) => (
     <FormControlLabel
       key={quickFilterLinks.value}
-      label={quickFilterLinks.lable}
+      label={quickFilterLinks.label}
       value={quickFilterLinks.value}
       onChange={() => handleQuickFilterChange(quickFilterLinks.value)}
       control={<Radio />}
@@ -21,7 +21,7 @@ export const QuickFilters: React.FC<Props> = ({ handleQuickFilterChange,selected
 
   return (
     <Fragment>
-      <Box className={classes.QuickFilterTitle} data-testid="quickFilterTitle">
+      <Box className={classes.quickFilterTitle} data-testid="quickFilterTitle">
          {/* todo add translation */}
         Quick Filters
       </Box>

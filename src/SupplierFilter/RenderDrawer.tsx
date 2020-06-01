@@ -15,7 +15,7 @@ import {previousStateType} from "./AdvanceFilterHook"
 export const RenderDrawer: React.FC = () => {
   const classes = useStyles();
   const [showDrawer, setshowDrawer] = useState(false);
-  const [quickFilter, setQuickFilter] = useQuickFilter("allsuppliers");
+  const [quickFilter, setQuickFilter] = useQuickFilter("allSuppliers");
 
   const filterHook: AdvanceFiltertype | null = useAdvanceFilterHook();
   const { resetState, applyFilterState, restorePreviousState } =
@@ -40,6 +40,10 @@ export const RenderDrawer: React.FC = () => {
   function openDrawer() {
     setshowDrawer(true);
   }
+  function callApplyFilterAPI(QuickFilterState:string,AdvanceFilterState?:previousStateType | null){
+    const FilterObject= AdvanceFilterState ? {...AdvanceFilterState,QuickFilter:QuickFilterState}: {QuickFilter:QuickFilterState}
+    //Fetch URL and pass this object FilterObject
+    }
 
   return (
     <div>
@@ -69,8 +73,3 @@ export const RenderDrawer: React.FC = () => {
 
 export default withAdvanceFilterProvider(RenderDrawer);
 
-function callApplyFilterAPI(QuickFilterState:string,AdvanceFIlterState?:previousStateType | null){
-  const FilterObject= AdvanceFIlterState ? {...AdvanceFIlterState,QuickFilter:QuickFilterState}: {QuickFilter:QuickFilterState}
-  console.log("FilterObject",FilterObject)
-  //Fetch URL and pass this object FilterObject
-  }

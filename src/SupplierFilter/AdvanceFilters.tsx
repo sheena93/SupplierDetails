@@ -16,11 +16,11 @@ import {
   OfferInformation,
   ClearingApr,
   ClearingDpe,
-  NonclearingApr,
-  NonclearingDpe,
-  hasap,
-  offerclearning,
-  offernotclearning,
+  NonClearingApr,
+  NonClearingDpe,
+  hasAp,
+  offerClearing,
+  offerNotClearing,
 } from "../SupplierFilter/SupplierFilters.schema";
 import { useAdvanceFilterHook, AdvanceFiltertype } from "./AdvanceFilterHook";
 
@@ -56,7 +56,7 @@ export const AdvanceFilters: React.FC = () => {
               content: classes.expansionPanelSummaryContentAdvance,
             }}
           >
-            <TypeBase classes={{ root: classes.advanceFiltertitle }}>
+            <TypeBase classes={{ root: classes.advanceTitle }}>
               {" "}
                {/* todo add translation */}
               Advance Filter
@@ -73,7 +73,7 @@ export const AdvanceFilters: React.FC = () => {
             value={supplier}
             data-testid="supplierInformation"
           ></MultiFilterComponent>
-          {supplier && supplier[hasap] && (
+          {supplier && supplier[hasAp] && (
             <MultiFilterComponent
               title="Elligible AP"
               options={ElligibleAp}
@@ -89,7 +89,7 @@ export const AdvanceFilters: React.FC = () => {
             value={offerinfo}
             data-testid="offerInformation"
           ></MultiFilterComponent>
-          {offerinfo && offerinfo[offerclearning] && (
+          {offerinfo && offerinfo[offerClearing] && (
             <div>
               <MultiFilterComponent
                 title="Clearning APR"
@@ -106,17 +106,17 @@ export const AdvanceFilters: React.FC = () => {
             </div>
           )}
 
-          {offerinfo && offerinfo[offernotclearning] && (
+          {offerinfo && offerinfo[offerNotClearing] && (
             <div>
               <MultiFilterComponent
                 title="Non-Clearning APR"
-                options={NonclearingApr}
+                options={NonClearingApr}
                 handleChange={setNonclearingApr}
                 value={nonclearingApr}
               ></MultiFilterComponent>
               <MultiFilterComponent
                 title="Non-Clearning DPE"
-                options={NonclearingDpe}
+                options={NonClearingDpe}
                 handleChange={setNonclearingDpe}
                 value={nonclearingDpe}
               ></MultiFilterComponent>{" "}

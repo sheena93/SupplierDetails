@@ -5,8 +5,8 @@ import {
   OfferInformation,
   ClearingApr,
   ClearingDpe,
-  NonclearingApr,
-  NonclearingDpe,
+  NonClearingApr,
+  NonClearingDpe,
 } from "../SupplierFilter/SupplierFilters.schema";
 import {
   useMultiSelectFilter,
@@ -88,12 +88,12 @@ function useProvideAdvanceFilter(): AdvanceFiltertype {
     nonclearingApr,
     setNonclearingApr,
     resetNonClearingApr,
-  ] = useMultiSelectFilter(NonclearingApr);
+  ] = useMultiSelectFilter(NonClearingApr);
   const [
     nonclearingDpe,
     setNonclearingDpe,
     resetNonClearingDpe,
-  ] = useMultiSelectFilter(NonclearingDpe);
+  ] = useMultiSelectFilter(NonClearingDpe);
 
   function resetState(previousAdvancedFilterState?: previousStateType | null) {
     resetSupplier(previousAdvancedFilterState?.supplier);
@@ -123,8 +123,6 @@ function useProvideAdvanceFilter(): AdvanceFiltertype {
       nonclearingApr,
       nonclearingDpe,
     };
-    // make api call using previousAdvancedFilterState and remove the below two lines
-    console.log("previousAdvancedFilterState", previousAdvancedFilterState);
     return previousAdvancedFilterState;
   }
 

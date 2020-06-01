@@ -48,7 +48,7 @@ export const MultiFilterComponent: React.FC<props> = ({
       control={
         <Checkbox checked={value[option.value]} onChange={handleChange} name={option.value} data-testid={option.value} />
       }
-      label={option.lable}
+      label={option.label}
       key={option.value}
     />
   ));
@@ -56,7 +56,7 @@ export const MultiFilterComponent: React.FC<props> = ({
   return (
     <div>
       <ExpansionPanel square classes={{ root: classes.expansionPanelRoot }} defaultExpanded={true}>
-        <Box className={classes.AdvanceFilterTitle}>
+        <Box className={classes.advanceFilterTitle}>
           <ExpansionPanelSummary
             expandIcon={<AngleDownIcon />}
             className={classes.advancedOptions}

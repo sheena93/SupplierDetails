@@ -7,9 +7,9 @@ import { QuickFilters } from "./QuickFilters";
 const handleQuickFilterChange = jest.fn();
 const selectedValue = "allsupplier";
 const QuickFiltersOptions = [
-  { lable: "All Suppliers", value: "allsuppliers" },
-  { lable: "Current Market", value: "currentmarket" },
-  { lable: "Non-Clearing", value: "nonclearing" },
+  { label: "All Suppliers", value: "allSuppliers" },
+  { label: "Current Market", value: "currentMarket" },
+  { label: "Non-Clearing", value: "nonClearing" },
 ];
 
 const renderQuickFilterComponent = () => {
@@ -27,39 +27,39 @@ describe("FilterDrawerComponent", () => {
   it("should render FilterDrawerComponent", () => {
     renderQuickFilterComponent();
     expect(screen.getByTestId("quickFilterTitle")).toBeInTheDocument();
-    expect(screen.getByTestId("allsuppliers")).toBeInTheDocument();
-    expect(screen.getByTestId("currentmarket")).toBeInTheDocument();
-    expect(screen.getByTestId("nonclearing")).toBeInTheDocument();
+    expect(screen.getByTestId("allSuppliers")).toBeInTheDocument();
+    expect(screen.getByTestId("currentMarket")).toBeInTheDocument();
+    expect(screen.getByTestId("nonClearing")).toBeInTheDocument();
   });
 });
 
 describe("renderQuickFilterComponent and check for radio buttons", () => {
   it("Renders renderQuickFilterComponent and All Suppliers Radio button", () => {
      renderQuickFilterComponent();
-    const allsuppliers = screen
-      .getByTestId("allsuppliers")
+    const allSuppliers = screen
+      .getByTestId("allSuppliers")
       .querySelector('input[type="radio"]') as HTMLElement;
-    fireEvent.click(allsuppliers);
-    expect(allsuppliers).not.toBeChecked();
+    fireEvent.click(allSuppliers);
+    expect(allSuppliers).not.toBeChecked();
   });
 
   it("Renders renderQuickFilterComponent and Current Market Radio button",  () => {
      renderQuickFilterComponent();
-    const currentmarket = screen
-      .getByTestId("currentmarket")
+    const currentMarket = screen
+      .getByTestId("currentMarket")
       .querySelector('input[type="radio"]') as HTMLElement;
-    expect(currentmarket).not.toBeChecked();
-    fireEvent.click(currentmarket);
-    expect(handleQuickFilterChange).toHaveBeenCalledWith("currentmarket");
+    expect(currentMarket).not.toBeChecked();
+    fireEvent.click(currentMarket);
+    expect(handleQuickFilterChange).toHaveBeenCalledWith("currentMarket");
   });
 
   it("Renders renderQuickFilterComponent and Non Clearing Radio button",  () => {
      renderQuickFilterComponent();
-    const nonclearing = screen
-      .getByTestId("nonclearing")
+    const nonClearing = screen
+      .getByTestId("nonClearing")
       .querySelector('input[type="radio"]') as HTMLElement;
-    expect(nonclearing).not.toBeChecked();
-    fireEvent.click(nonclearing);
-    expect(handleQuickFilterChange).toHaveBeenCalledWith("nonclearing");
+    expect(nonClearing).not.toBeChecked();
+    fireEvent.click(nonClearing);
+    expect(handleQuickFilterChange).toHaveBeenCalledWith("nonClearing");
   });
 });

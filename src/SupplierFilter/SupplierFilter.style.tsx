@@ -17,13 +17,13 @@ export const useStyles = makeStyles<Theme>(theme => ({
     padding: theme.spacing(2),
     fontWeight: 'bold',
   },
-  QuickFilterTitle: {
+  quickFilterTitle: {
     backgroundColor: Liquidity.colors.greys.light,
     padding: theme.spacing(1.5),
     fontSize: theme.typography.pxToRem(15),
   },
 
-  AdvanceFilterTitle: {
+  advanceFilterTitle: {
     backgroundColor: Liquidity.colors.greys.light,
     margin: theme.spacing(1,0,0,0),
     fontSize: theme.typography.pxToRem(15),
@@ -61,7 +61,7 @@ export const useStyles = makeStyles<Theme>(theme => ({
   formControl:{
     padding: theme.spacing(0, 0, 0, 2),
   },
-  advanceFiltertitle: {
+  advanceTitle: {
     color: Liquidity.colors.main.midBlue,
     fontSize: theme.typography.pxToRem(14),
     fontWeight: 'bold',

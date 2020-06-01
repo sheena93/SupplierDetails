@@ -6,10 +6,10 @@ import { MultiFilterComponent,testIds } from "./MultiFilterWrapper";
 
 const handleChange = jest.fn();
 const options = [
-  { lable: "Is Registered", value: "isregistered" },
-  { lable: "Is not Registered", value: "isnotregistered" },
-  { lable: "Has AP", value: "hasap" },
-  { lable: "Does not have AP", value: "havenoap" },
+  { label: "Is Registered", value: "isRegistered" },
+  { label: "Is not Registered", value: "isNotRegistered" },
+  { label: "Has AP", value: "hasAp" },
+  { label: "Does not have AP", value: "haveNoAp" },
 ];
 const title = "test";
 const value = {};
@@ -29,55 +29,55 @@ describe("FilterDrawerComponent", () => {
   it("should render FilterDrawerComponent",() => {
     renderMultiFilterComponent();
     expect(screen.getByTestId(testIds.advanceFilter)).toBeInTheDocument();
-    expect(screen.getByTestId("isregistered")).toBeInTheDocument();
-    expect(screen.getByTestId("isnotregistered")).toBeInTheDocument();
-    expect(screen.getByTestId("hasap")).toBeInTheDocument();
-    expect(screen.getByTestId("havenoap")).toBeInTheDocument();
+    expect(screen.getByTestId("isRegistered")).toBeInTheDocument();
+    expect(screen.getByTestId("isNotRegistered")).toBeInTheDocument();
+    expect(screen.getByTestId("hasAp")).toBeInTheDocument();
+    expect(screen.getByTestId("haveNoAp")).toBeInTheDocument();
   });
 });
 
 describe("FilterDrawerComponent checkboxes check and uncheck", () => {
-it('Renders renderMultiFilterComponent and isregistered checkbox', () => {
+it('Renders renderMultiFilterComponent and isRegistered checkbox', () => {
    renderMultiFilterComponent();
-  const isregistered = screen
-    .getByTestId('isregistered')
+  const isRegistered = screen
+    .getByTestId('isRegistered')
     .querySelector('input[type="checkbox"]') as HTMLElement;
-  expect(isregistered).not.toBeChecked();
+  expect(isRegistered).not.toBeChecked();
   // change value
-  fireEvent.click(isregistered);
-  expect(isregistered).toBeChecked();
+  fireEvent.click(isRegistered);
+  expect(isRegistered).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and isnotregistered checkbox', () => {
+it('Renders renderMultiFilterComponent and isNotRegistered checkbox', () => {
    renderMultiFilterComponent();
-  const isnotregistered = screen
-    .getByTestId('isnotregistered')
+  const isNotRegistered = screen
+    .getByTestId('isNotRegistered')
     .querySelector('input[type="checkbox"]') as HTMLElement;
-  expect(isnotregistered).not.toBeChecked();
+  expect(isNotRegistered).not.toBeChecked();
   // change value
-  fireEvent.click(isnotregistered);
-  expect(isnotregistered).toBeChecked();
+  fireEvent.click(isNotRegistered);
+  expect(isNotRegistered).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and hasap checkbox', () => {
+it('Renders renderMultiFilterComponent and hasAp checkbox', () => {
    renderMultiFilterComponent();
-  const hasap = screen
-    .getByTestId('hasap')
+  const hasAp = screen
+    .getByTestId('hasAp')
     .querySelector('input[type="checkbox"]') as HTMLElement;
-  expect(hasap).not.toBeChecked();
+  expect(hasAp).not.toBeChecked();
   // change value
-  fireEvent.click(hasap);
-  expect(hasap).toBeChecked();
+  fireEvent.click(hasAp);
+  expect(hasAp).toBeChecked();
 });
 
-it('Renders renderMultiFilterComponent and havenoap checkbox',  () => {
+it('Renders renderMultiFilterComponent and haveNoAp checkbox',  () => {
    renderMultiFilterComponent();
-  const havenoap = screen
-    .getByTestId('havenoap')
+  const haveNoAp = screen
+    .getByTestId('haveNoAp')
     .querySelector('input[type="checkbox"]') as HTMLElement;
-  expect(havenoap).not.toBeChecked();
+  expect(haveNoAp).not.toBeChecked();
   // change value
-  fireEvent.click(havenoap);
-  expect(havenoap).toBeChecked();
+  fireEvent.click(haveNoAp);
+  expect(haveNoAp).toBeChecked();
 });
 });
