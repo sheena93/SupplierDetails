@@ -4,14 +4,14 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Container from "./Container";
 import { BasePage } from "./BasePage/BasePage";
-import {ViewUserModal} from "./ViewUserWidget/ViewUserModal"
+import {ContactManagerPage} from "./ViewUserWidget/ContactManager"
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BasePage>
       <Container>
-          <ViewUserModal/>
+          <ContactManagerPage/>
       </Container>
     </BasePage>
   </React.StrictMode>,
