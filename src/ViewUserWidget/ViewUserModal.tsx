@@ -66,6 +66,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
       id: "userEmail",
       align: "left",
       disablePadding: false,
+      //todo: defaultText={<T k="tpf.emailAddress">Email Address</T>}
       defaultText: "Email Address",
       testId: testIds.head.userEmail,
       colSpan: 8,
@@ -74,6 +75,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
       id: "userName",
       align: "left",
       disablePadding: false,
+      //todo: defaultText={<T k="profile.fullName">Full Name</T>}
       defaultText: "Full Name",
       testId: testIds.head.userName,
       colSpan: 4,
@@ -82,6 +84,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
       id: "title",
       align: "left",
       disablePadding: false,
+      //todo: defaultText={<T k="profile.title">Title</T>}
       defaultText: "Title",
       testId: testIds.head.title,
       colSpan: 5,
@@ -90,6 +93,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
       id: "phone",
       align: "left",
       disablePadding: false,
+      //todo: defaultText={<T k="profile.phone">Phone</T>}
       defaultText: "Phone",
       testId: testIds.head.phone,
       colSpan: 3,
@@ -98,6 +102,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
       id: "status",
       align: "left",
       disablePadding: false,
+      //todo: defaultText={<T k="tpf.status">Status</T>}
       defaultText: "Status",
       testId: testIds.head.status,
       colSpan: 3,
@@ -175,12 +180,12 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
         aria-labelledby="view-user-modal-title"
         open={!!userName}
         onClose={onModalClose}
-        // TODO: Update trsanlation
+        // TODO: Update translation
         modalTitle="View Contacts"
         closeButtonTestId={testIds.modalCloseButton}
         actionsContent={
           <Grid className={classes.footerContainer}>
-             {/* TODO: Update trsanlation */}
+             {/* TODO: Update translation */}
             <TypeHelper
               data-testid="srm-widget:name"
               classes={{ root: classes.footerNote }}
@@ -190,7 +195,7 @@ export const ViewUserModal: React.FC<ViewUserModalProps> = ({
               data copied from this screen will require an Article 13 notice to
               the individual user within a calender month of such action.
             </TypeHelper>
-             {/* TODO: Update trsanlation */}
+             {/* TODO: Update translation */}
             <Button
               size="large"
               onClick={onModalClose}
